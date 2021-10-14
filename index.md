@@ -15,4 +15,4 @@
 
 ### Class Github Page
 
-[IE 48B](https://https://github.com/BU-IE-48B)
+[IE 48B](https://github.com/BU-IE-48B)
