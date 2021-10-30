@@ -7,7 +7,7 @@
 
 ## Homework 0
 
-[here](Homework 0\example_homework_0.html) is my 5 interest in R examples 
+[here](Homework0\example_homework_0.html) is my 5 interest in Machine Learning
 
 
 
