@@ -28,7 +28,7 @@ import os
 # 1. [Part 2: Piecewise Aggregate Approximation](#3)
 # 1. [Part 2: Adaptive Piecewise Representation with Linear Regressor Tree](#4)
 # 1. [Part 2: Gesture Recognation Perspective](#5)
-# 1. [Part 2: Last Comment and Conclusion](#6)
+# 1. [Last Comment and Conclusion](#6)
 
 # <a id="1"></a>
 # # Data Preparation
