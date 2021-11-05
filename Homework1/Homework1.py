@@ -14,15 +14,21 @@ import os
 
 # # Introduction
 
+# In this homework, Gesture Recognition Data was used to satisfy the required tasks from the Homework Description. This Notebook includes 2 main parts. The first one is related to display of given data on 3D axis. In this manner, acceleration data was converted to speed and then to location. This 2-step conversion decision was taken after asking the Professor Baydoğan (Only speed is mentioned in the Homework Description). So, location will also be used for second part of the Notebook. 
 # 
+# In the second part of the Notebook, 2 different representation types will be tried in order to represent the Gestures. However, these representation types will be controlled in different manners. First of all, how techniques perform **will be controlled in each axis individually.** By doing that, possible problems will be understoood and a comparision will be hold in **axis manner.** Piecewise Aggregate Approximation is the first technique to control this performance measure, and the second one is Adaptive Piecewise Constant Approximation with Linear Regressor Tree. The performance of the these techniques will be controlled visually(as mentined in Homework Description) in each Gesture and in each axis. Only one example will be plotted in order to reduce the lenght of the Notebook.
+# 
+# In addition to representation in axis base, gesture recognition must be controlled on all axis to classify them. In this perspective, hard voting technique by using SAX representation will be used to get 1 dimensional result firstly. For second Technique, PCA(Principal Component Analysis) will be tried to reduce 3 dimension to 1 dimension. Linear Regressor Tree for Adaptive Piecewise Constant Approximation will be tried in this reduced dimension. At the end, both techniques can be controlled **visually in one dimension.** 
 
 # # Context
+# (In order to get specified techniques rapidly, a context part is added to Notebook.)
 # 
 # 1. [Data Preparation](#1)
 # 1. [Part 1: Display of Gestures](#2)
 # 1. [Part 2: Piecewise Aggregate Approximation](#3)
-# 1. [Part 2: Adaptive Piecewise Representation with Linear Regressor](#4)
+# 1. [Part 2: Adaptive Piecewise Representation with Linear Regressor Tree](#4)
 # 1. [Part 2: Gesture Recognation Perspective](#5)
+# 1. [Part 2: Last Comment and Conclusion](#6)
 
 # <a id="1"></a>
 # # Data Preparation
@@ -98,6 +104,8 @@ def filter_data(ind_data, x_data, y_data, z_data, index):
 
 import plotly.express as px
 
+
+# As mentioned before, Gestures will be drawn with location information. For each Gesture, 1 example plot will be added. In addition, Gestures will be plotted by using created print_graph() function.
 
 # ## Graph Display Function
 
@@ -244,7 +252,7 @@ print_graph(x_8.T.cumsum().iloc[:, 0], y_8.T.cumsum().iloc[:, 0], z_8.T.cumsum()
 
 # # Part 2: 2 Representation Method
 
-# 2 Different will be tried to represent existing dataset.
+# First of all, PAA will be tried in the beginning of part 2. In addition, SAX will be used after applying znorm, in order to have string representation. String data will be obtained in Piecewise Aggregate Approximation techniques because both of them have similar processes. In order to reduce lenght of Notebook, this approach will be used. In addition, majority function exists in the beggining of this part. This function decision final string by considering the axis's strings. How to work this function can be understood by looking the explanation of function.
 
 # In[29]:
 
@@ -258,7 +266,9 @@ from saxpy.alphabet import cuts_for_asize
 # <a id="3"></a>
 # # Piecewise Aggregate Approximation Function
 
-# There is 315 different time point in each axis, so it is hard to observe and analyze it by using Symbolic Aggregate approXimation(SAX) without Piecewise Aggregate Approximation(PAA). In this manner, SAX will be used with PAA in order to understand the symbols more easily. In addition, each axis will be constructed seperately.
+# There is 315 different time point in each axis, so it is hard to observe and analyze it by using Symbolic Aggregate approXimation(SAX) without Piecewise Aggregate Approximation(PAA). In this manner, SAX will be used with PAA in order to understand the symbols more easily. In addition, each axis will be constructed separately. Each axis will be inspected separately, and final comment will be at the end of the all plots.
+# 
+# 3 different functions are created for this part, string_with_paa(), majority_voting(), and visualization(). Both of them reduces the lenght of the Notebook. In addition, understandable variable names and some notes will be added these functions to make it easily controllable.
 
 # In[30]:
 
@@ -281,6 +291,10 @@ def string_with_paa(dataset):
             
     return shape_information, value_information
 
+
+# ## Majority Voting
+
+#  there is at least 2 the same string for a specific period, this string is decided as final letter(3 to 1 Dimension Reduction). In addition, If there is 3 different letters for specific period, these letters converted to numbers and soft voting will be used to get a number. At the end of this situation, this number will be converted to a string by considering initial determined values. 
 
 # In[31]:
 
@@ -841,10 +855,16 @@ Z_8_0=visualization(z_8, value_data_8, 8, "Z", 0) #Returned Dataset Represent th
 
 # # General Comment for Axis Representation
 
-# If there is an huge increase or decrease it is hard to represent this period by a single line. This problem can be handled by increasing the number of slot bu it can cause an overfitting problem. In addition, it is hard to understand the gesture by seperately looking the axis information. Final Gesture recognition will be handled at the end of the notebook by using moderate hard majority voting technique. In addition, numerical values didn't calculated because **only visual inspection was demanded in homework description.** 
+# If there is an huge increase or decrease it is hard to represent this period by a single line. This problem can be handled by increasing the number of slot bu it can cause an overfitting problem. In addition, it is hard to understand the gesture by separately looking the axis information. Final Gesture recognition will be handled at the end of the notebook by using moderate hard majority voting technique. In addition, numerical values didn't calculated because **only visual inspection was demanded in homework description.** 
 
 # <a id="4"></a>
-# # Adaptive Piecewise Representation with Linear Regressor
+# # Adaptive Piecewise Representation with Linear Regressor Tree
+
+# In the second Technique, Linear Regression Tree will be tried in axis base and performance of the Adaptive Piecewise Representation with Linear Regression Tree will be compared with previously obtained results. Plotting both of them in the same plot will not be tried because **the main aim to get these plots to understand performance of the techniques rather than recognition.** 
+# 
+# Moreover, Principal Component Analysis part will be tried in this part to reduce lenght of the Notebook. 1 Dimensional representation of Gestures will be controlled **at the end of the Notebook.** In addition, plotting the both techniques at the same plot will be also tried **at the end of the Notebook.**
+# 
+# 2 different functions are created for this part, decision_tree() and visualization_regressor(). Both of them reduces the lenght of the Notebook. In addition, understandable variable names and some notes will be added these functions to make it easily controllable.
 
 # In[96]:
 
@@ -898,7 +918,7 @@ def visualization_regressor(origin, created, gesture_no, ax_code, id_value):
     plt.figure(figsize=(14, 8)) 
     plt.plot(mergedDf["original_values"], label="True Values")
     plt.plot(mergedDf["Regressor_value"], label="Regressor Value")
-    plt.title(f"{ax_code} axis of {gesture_no}. Gesture with Regressor \n({id_value+1}. Time Series in Gesture)")
+    plt.title(f"{ax_code} axis of {gesture_no}. Gesture with Regressor Tree \n({id_value+1}. Time Series in Gesture)")
     
     return(mergedDf)
 
@@ -1542,13 +1562,32 @@ y_8_0_r=visualization_regressor(y_8_r[0], y_8_0_reg_pred, 8, "Y", 0)
 z_8_0_r=visualization_regressor(z_8_r[0], z_8_0_reg_pred, 8, "Z", 0)
 
 
-# Performance of Regressor
+# In general, Adaptive Piecewise Representation with Linear Regression Tree can get good results in changing phases. However, main problem in the Linear Regressor Tree is that peak positions in axis are represented by a single line. It is caused by greed of the Decision Tree. In these areas, only one line can be located in the middle of the peak but it also results a loss in the representation skill. In general, by increasing the number of dept of Linear Regressor Tree, this problem can be handled. However, in this level Piecewise Aggregate Approximation has better representation to Adaptive Piecewise Representation with Linear Regression Tree.
 
-# # Regression Tree to Find Piecewise Models on PCA
-
-# Neden bunu yaptım
+# <a id="5"></a>
+# # Gesture Recognation Perspective
 
 # In[181]:
+
+
+import seaborn as sns
+
+
+# In[182]:
+
+
+sns.set(rc={'figure.figsize':(16,16)})
+
+
+# In order to understand performance of the techniques in Gesture Recognition, 2 sample from each gesture will be displayed in the plot. By doing that, differentiation between the Gestures by looking the plot can be undestood. The main problem for these plots are having to many Gestures and Lines in one plot. So, Each technique will be analyzed separately, and 2 different version, 8 Gesture at one plot and 3 Gesture at one plot. In addition, general behavior of obtained lines can be understood much more easily by having 2 separate plot for 2 techniques. 
+# 
+# In addition, for loop and different functions like string_to_value() and scaler_to_1() are used to get similar dataframes in short way. In general, all line plots' y values will be scaled into 0 to 1. For string Representation, manuel values are determined, and MinMaxScaler() is used for getting 0 to 1 values.
+# 
+# As mentioned in the introduction, the main aim in this part to having 1 dimensional representations with different techniques(hard voting and PCA), and understand of their performance with SAX and Linear Regressor Tree. So, we will have 2 different representations with the aiming of estimating/representing the Gesture behavior of given data.
+
+# ### Regression Tree to Find Piecewise Models on PCA
+
+# In[183]:
 
 
 def decision_tree_pca(dataset):
@@ -1562,13 +1601,13 @@ def decision_tree_pca(dataset):
     return predictions
 
 
-# In[182]:
+# In[184]:
 
 
 pca_names= [pca_1, pca_2, pca_3, pca_4, pca_5, pca_6, pca_7, pca_8]
 
 
-# In[183]:
+# In[185]:
 
 
 for pca_data in pca_names:
@@ -1576,22 +1615,7 @@ for pca_data in pca_names:
         pca_data[j]["predictions"]=decision_tree_pca(pca_data[j])
 
 
-# <a id="5"></a>
-# # Gesture Recognation Perspective
-
-# In[184]:
-
-
-import seaborn as sns
-
-
-# In[185]:
-
-
-sns.set(rc={'figure.figsize':(16,16)})
-
-
-# ## String to Value
+# ### String to Value
 
 # In[186]:
 
@@ -1606,6 +1630,8 @@ def string_to_value(dataset):
 
 
 # ## DataFrame for String
+
+# This part is control the performance of the SAX with hard voting technique.
 
 # In[187]:
 
@@ -1659,12 +1685,14 @@ plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 plt.show()
 
 
+# Having limited obtion is good for analyzing the possible gesture recognitions visually. Much as there are 16 different lines, it is hard to understand the general behaviour of the gestures. In addition, I have moderate color-blindness, so it can be hard to figure out what is happening in the plot. In this perspective reduced gesture recognition will be tried to understand the performance of SAX with hard voting Technique.
+
 # ## Reduced Gesture Recognition
 
-# In[192]:
+# In[202]:
 
 
-palette_3 = sns.color_palette("bright", 3) 
+palette_3 = sns.color_palette("husl", 3) 
 ax = sns.lineplot(x="Time", y="string_values", style="ID", hue="Gesture No", 
              data=string_dt[string_dt["Gesture No"]<=3], palette=palette_3)
 ax.set_title("Gesture Recognition(first 3) with Strings' Values")
@@ -1673,7 +1701,11 @@ plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 plt.show()
 
 
+# In this plot, Gesture 1 can be understood easily so it is a good sign related to performance of this apprach. However, this comment cannot be made for gesture 2 and gesture 3. Nevertheless, it can be said that this approach can be a good appraoch in same ways to distinguish the gestures.
+
 # # DataFrame for Regressors
+
+# This part is control the performance of the Linear Regressor Tree with PCA technique.
 
 # In[193]:
 
@@ -1688,6 +1720,8 @@ scaler=MinMaxScaler()
 
 
 # ## Value Normalization
+
+# In order to have similar scale with previous technique. In addition, scale was applied each instance separately.
 
 # In[195]:
 
@@ -1758,9 +1792,11 @@ plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 plt.show()
 
 
+# Again there are 16 different lines and it is hard to understand the general behaviour of the gestures. I want to emphasize one more time, I have moderate color-blindness, so it can be hard to figure out what is happening in the plot. In this perspective reduced gesture recognition will be tried to understand the performance of Adaptive Piecewise Representation with Linear Regressor Tree with PCA.
+
 # ## Reduced Gesture Recognition
 
-# In[201]:
+# In[203]:
 
 
 ax = sns.lineplot(x="Time", y="Scaled Values", style="ID", hue="Gesture No", 
@@ -1770,6 +1806,17 @@ ax.set_ylabel("Normalized Values")
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 plt.show()
 
+
+# Much as there is more alternative value for y axis, there is less rapid change compared to the other. One of the reason for this situation can be caused from having 315 time point in x axis. However, gesture recognition by lookin the plot is harder than previous one. One of the reason for this situation can be PCA coefficient finding for each instance seperately. The main objective for trying pca for each instances is to have a system can be applied to new instances without knowing the gesture type. In general, some part of the lines gives hints related to gesture but it is hard to conclude any decision related to gesture by just looking these things.
+
+# <a id="6"></a>
+# # Last Comment and Conclusion
+
+# In this homework, preprocessing for gesture display was tried in the first part and different approaches were tried to represent the gestures. For second part, inspections were hold in the axis bases, which give some insights related to approaches and their deficients. Moreover, gesture based problems could be analyzed by having these inspections, but there was no certain problem related to gesture-based things. 
+# 
+# At the end of the notebook, 2 different approach with 2 different techniques(details can be found in description) were tried, which was demanded by homework description. These techniques were analyzed by taking 2 samples from each gesture. At the end, 4 different plots were created and general performance of approaches were interpreted. It is hard to pick a certain winner among these 2 approach but it can be said that SAX with hard voting technique is better in somehow to recognition of the gestures. The main reason for this selection is is has similar conversion in each step, so this technique can continue the information related to gesture. Because of this fact, **I would choose the first approach, namely SAX with moderate hard voting technique.**
+# 
+# One of the problem for this selection is the my disability related to colors. So, I tried my best to understand their behaviour but it may not be adequate to decide which approach is the best. I wanted to mention this situation for the evaluation part of my homework's comments.
 
 # In[ ]:
 
