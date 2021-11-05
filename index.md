@@ -12,7 +12,7 @@
 
 ## Homework 1
 
-[here](Homework1\Homework_1.html) HTML file of Homework 1
+[here](Homework1\Homework_1.html) HTML file of Homework 1 <br>
 [here](Homework1\Homework_1.py) Python Code of Homework 1
 
 
