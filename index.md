@@ -10,6 +10,10 @@
 [here](Homework0\example_homework_0.html) is my 5 interest in Machine Learning
 
 
+## Homework 1
+
+[here](Homework1\Homework_1.html) HTML file of Homework 1
+[here](Homework1\Homework_1.py) Python Code of Homework 1
 
 
 
