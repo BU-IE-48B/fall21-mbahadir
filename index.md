@@ -15,6 +15,10 @@
 [here](Homework1\Homework1.html) HTML file of Homework 1 <br>
 [here](Homework1\Homework1.py) Python Code of Homework 1
 
+## Homework 2
+
+[here](Homework2\Homework2.html) HTML file of Homework 2 <br>
+[here](Homework2\Homework2.py) Python Code of Homework 2
 
 
 ### Class Github Page
