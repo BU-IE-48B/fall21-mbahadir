@@ -213,8 +213,8 @@ library(hydroGOF)
 performance_list=vector("list", 30)
 
 mse_calculator=function(index, train, fused, regressor){
-    fused_lasso_performance=sum(mse(train[1], fused[1]))
-    regressor_performance=sum(mse(train[1], regressor[1]))
+    fused_lasso_performance=sum(mse(train[1], fused[1]))/128
+    regressor_performance=sum(mse(train[1], regressor[1]))/128
     perf_dt=data.frame(index, fused_lasso_performance, regressor_performance)
     return(perf_dt)
 }
@@ -239,7 +239,24 @@ box_plot_dt %>%
 
 timeseries_class=as.matrix(train[,1])
 
+large_number=10000
+
+euc_dist_raw=as.matrix(dist(train_perf))
+
+diag(euc_dist_raw)=large_number
+
+neighborhood_raw=apply(euc_dist_raw,1,order)
+
+predicted_raw=timeseries_class[neighborhood_raw[1,]]
+
+table(timeseries_class,predicted_raw)
+
+acc_raw=sum(timeseries_class==predicted_raw)/length(predicted_raw)
+print(paste0("The accuracy of Raw Dataset: ", acc_raw))
+
 euc_dist_fused=as.matrix(dist(fused_dt))
+
+diag(euc_dist_fused)=large_number
 
 neighborhood_fused=apply(euc_dist_fused,1,order)
 
@@ -251,6 +268,8 @@ acc_lasso=sum(timeseries_class==predicted_fused)/length(predicted_fused)
 print(paste0("The accuracy of Fused Lasso Model: ", acc_lasso))
 
 euc_dist_regressor=as.matrix(dist(regressor_dt))
+
+diag(euc_dist_regressor)=large_number
 
 neighborhood_regressor=apply(euc_dist_regressor,1,order)
 
