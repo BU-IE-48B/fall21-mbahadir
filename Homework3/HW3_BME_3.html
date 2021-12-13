@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HW3_Beef_1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>HW3_BME_3</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14281,34 +14281,12 @@ a.anchor-link {
 <h1 id="Summary">Summary<a class="anchor-link" href="#Summary">&#182;</a></h1><p>In this homework, 60 different parameter combination will be tried to get hyperparameter tuning. To get this combination, 5 different representation types(raw + 2 different difference taken + 2 different PAA), 4 different distance calculations, and 3 different k values will be used. Difference will be taken by shift function and 1, 2 will be used to get difference values. For PAA, 2 different segment length will be used by considering proper values for timeseries. In terms of distance, Euclidean, Dynamic Time Warping, Longest Common Subsequence, and Edit Distance with Real Penalties will be used. Lastly, k values are selected as 1, 3, 5 for k-nearest neighbor model.</p>
 <p>Performance of the models will be inspected by using 10-fold cross and 5 repeated validation technique. Moreover, performance of the models will be controlled by having the same test indices to have identical conditions. Lastly, obtained 60 performance will be controlled by a dataframe including average accuracy and standard deviation in accuracy. By considering this dataframe, the best parameter combination will be controlled and this parameters will be used to get accuracy performance in the test dataset. Last comments will be held at the end of the notebooks.</p>
 <h3 id="Parameter-Selections">Parameter Selections<a class="anchor-link" href="#Parameter-Selections">&#182;</a></h3><ul>
-<li>Representation Type(5): Raw, 1 Difference Taken, 2 Difference Taken, Piecewise Aggregate Approximation(PAA) with 5 segment length, Piecewise Aggregate Approximation(PAA) with 10 segment length</li>
+<li>Representation Type(5): Raw, 1 Difference Taken, 2 Difference Taken, Piecewise Aggregate Approximation(PAA) with 4 segment length, Piecewise Aggregate Approximation(PAA) with 8 segment length</li>
 <li>Distance Calculation(4): Euclidean, Dynamic Time Warping with default parameters, Longest Common Subsequence(LCSS) with epsilon 0.05, Edit Distance with Real Penalties(ERP) with epsilon 0.5</li>
 <li>k values of nearest neighbor model(3): 1, 3, 5</li>
 </ul>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">dist_lcss</span><span class="o">=</span><span class="nf">TSDatabaseDistances</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="s">&#39;lcss&#39;</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="m">0.05</span><span class="p">)</span>
-<span class="n">dist_lcss</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">dist_lcss</span><span class="p">)</span>
-<span class="nf">diag</span><span class="p">(</span><span class="n">dist_lcss</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_lcss</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_lcss_raw_epsilon_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>  
-
-<span class="n">dist_erp</span><span class="o">=</span><span class="nf">TSDatabaseDistances</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="s">&#39;erp&#39;</span><span class="p">,</span><span class="n">g</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
-<span class="n">dist_erp</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">dist_erp</span><span class="p">)</span>
-<span class="nf">diag</span><span class="p">(</span><span class="n">dist_erp</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_erp</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_erp_raw_gap_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -14377,7 +14355,7 @@ a.anchor-link {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">first_dataset</span><span class="o">=</span><span class="s">&quot;Beef&quot;</span>
 <span class="n">second_dataset</span><span class="o">=</span><span class="s">&quot;BirdChicken&quot;</span>
-<span class="n">third_dataset</span><span class="o">=</span><span class="s">&quot;BMW&quot;</span>
+<span class="n">third_dataset</span><span class="o">=</span><span class="s">&quot;BME&quot;</span>
 <span class="n">fourth_dataset</span><span class="o">=</span><span class="s">&quot;Coffee&quot;</span>
 <span class="n">fifth_dataset</span><span class="o">=</span><span class="s">&quot;Wine&quot;</span>
 </pre></div>
@@ -14398,7 +14376,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">traindata</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">fread</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_TRAIN.txt&#39;</span><span class="p">,</span><span class="n">dataset_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span><span class="n">first_dataset</span><span class="p">)))</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">traindata</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">fread</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_TRAIN.txt&#39;</span><span class="p">,</span><span class="n">dataset_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span><span class="n">third_dataset</span><span class="p">)))</span>
 </pre></div>
 
      </div>
@@ -14434,14 +14412,14 @@ a.anchor-link {
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
 <table>
-<thead><tr><th scope=col>V1</th><th scope=col>V2</th><th scope=col>V3</th><th scope=col>V4</th><th scope=col>V5</th><th scope=col>V6</th><th scope=col>V7</th><th scope=col>V8</th><th scope=col>V9</th><th scope=col>V10</th><th scope=col>...</th><th scope=col>V462</th><th scope=col>V463</th><th scope=col>V464</th><th scope=col>V465</th><th scope=col>V466</th><th scope=col>V467</th><th scope=col>V468</th><th scope=col>V469</th><th scope=col>V470</th><th scope=col>V471</th></tr></thead>
+<thead><tr><th scope=col>V1</th><th scope=col>V2</th><th scope=col>V3</th><th scope=col>V4</th><th scope=col>V5</th><th scope=col>V6</th><th scope=col>V7</th><th scope=col>V8</th><th scope=col>V9</th><th scope=col>V10</th><th scope=col>...</th><th scope=col>V120</th><th scope=col>V121</th><th scope=col>V122</th><th scope=col>V123</th><th scope=col>V124</th><th scope=col>V125</th><th scope=col>V126</th><th scope=col>V127</th><th scope=col>V128</th><th scope=col>V129</th></tr></thead>
 <tbody>
-	<tr><td>1           </td><td>-0.3629225  </td><td>-0.36532777 </td><td>-0.3878120  </td><td>-0.40559023 </td><td>-0.39900183 </td><td>-0.36658270 </td><td>-0.32454241 </td><td>-0.31732654 </td><td>-0.326529390</td><td>...         </td><td>-1.85263380 </td><td>-1.84928730 </td><td>-1.84939180 </td><td>-1.87626840 </td><td>-1.8804515  </td><td>-1.85817640 </td><td>-1.84468580 </td><td>-1.8362150  </td><td>-1.84008440 </td><td>-1.86110460 </td></tr>
-	<tr><td>1           </td><td>-0.1162805  </td><td>-0.11642809 </td><td>-0.1054315  </td><td>-0.08978528 </td><td>-0.06517204 </td><td>-0.05081739 </td><td>-0.03952556 </td><td>-0.02638866 </td><td>-0.022587820</td><td>...         </td><td>-0.01395289 </td><td>-0.01590867 </td><td>-0.02347345 </td><td>-0.03125965 </td><td>-0.0326988  </td><td>-0.03705317 </td><td>-0.04793908 </td><td>-0.0589357  </td><td>-0.05277317 </td><td>-0.05709063 </td></tr>
-	<tr><td>1           </td><td>-0.1793167  </td><td>-0.18108243 </td><td>-0.1780963  </td><td>-0.17004682 </td><td>-0.15745324 </td><td>-0.14743031 </td><td>-0.13236994 </td><td>-0.12252877 </td><td>-0.116478660</td><td>...         </td><td>-0.97484155 </td><td>-0.97876244 </td><td>-0.98185241 </td><td>-0.98115132 </td><td>-0.9870716  </td><td>-0.99242063 </td><td>-0.99795142 </td><td>-1.0012232  </td><td>-1.00114530 </td><td>-1.00901300 </td></tr>
-	<tr><td>1           </td><td>-0.1037569  </td><td>-0.09530983 </td><td>-0.0802619  </td><td>-0.06888111 </td><td>-0.05137999 </td><td>-0.03843118 </td><td>-0.02340854 </td><td>-0.01058618 </td><td>-0.007677755</td><td>...         </td><td> 0.37714467 </td><td> 0.37142898 </td><td> 0.37125195 </td><td> 0.37259235 </td><td> 0.3680653  </td><td> 0.36432231 </td><td> 0.36090807 </td><td> 0.3554959  </td><td> 0.35600169 </td><td> 0.35046304 </td></tr>
-	<tr><td>1           </td><td>-0.2080996  </td><td>-0.19696822 </td><td>-0.1779343  </td><td>-0.15431197 </td><td>-0.12104519 </td><td>-0.10524029 </td><td>-0.07949359 </td><td>-0.04151084 </td><td>-0.025281068</td><td>...         </td><td>-0.92658549 </td><td>-0.93117401 </td><td>-0.93423303 </td><td>-0.94659654 </td><td>-0.9504628  </td><td>-0.95292700 </td><td>-0.97051633 </td><td>-0.9796084  </td><td>-0.96813710 </td><td>-0.98033066 </td></tr>
-	<tr><td>1           </td><td>-0.4280192  </td><td>-0.44440692 </td><td>-0.4750292  </td><td>-0.48268475 </td><td>-0.48459864 </td><td>-0.46199080 </td><td>-0.44895241 </td><td>-0.46593820 </td><td>-0.469526750</td><td>...         </td><td>-1.79429860 </td><td>-1.78927470 </td><td>-1.79214550 </td><td>-1.82312660 </td><td>-1.8198969  </td><td>-1.81104520 </td><td>-1.80733700 </td><td>-1.7805425  </td><td>-1.78269570 </td><td>-1.79776760 </td></tr>
+	<tr><td>1            </td><td> 0.0377646330</td><td>0.0002531124 </td><td>0.003977076  </td><td>0.02076406   </td><td>0.02173118   </td><td>0.114000000  </td><td>0.41400000   </td><td>0.71800000   </td><td>0.88900000   </td><td>...          </td><td>0.034208601  </td><td>0.02283097   </td><td>0.013387386  </td><td>0.038906948  </td><td>0.039187692  </td><td> 0.0536167050</td><td>0.054673016  </td><td>0.031523157  </td><td>0.03978737   </td><td>0.02066080   </td></tr>
+	<tr><td>1            </td><td> 0.0004248819</td><td>0.0209818240 </td><td>0.002525833  </td><td>0.02011753   </td><td>0.03707394   </td><td>0.034782011  </td><td>0.08300000   </td><td>0.31700000   </td><td>0.55000000   </td><td>...          </td><td>0.036964033  </td><td>0.01122764   </td><td>0.025040340  </td><td>0.044364509  </td><td>0.043476064  </td><td> 0.0441632130</td><td>0.021766566  </td><td>0.007789026  </td><td>0.02919420   </td><td>0.02183739   </td></tr>
+	<tr><td>1            </td><td> 0.0198557600</td><td>0.0036765858 </td><td>0.035077439  </td><td>0.01154532   </td><td>0.12700000   </td><td>0.462000000  </td><td>0.79700000   </td><td>0.98500000   </td><td>1.07400000   </td><td>...          </td><td>0.043864909  </td><td>0.01768577   </td><td>0.046659284  </td><td>0.005716803  </td><td>0.019495807  </td><td> 0.0215920930</td><td>0.018679618  </td><td>0.022478860  </td><td>0.03220358   </td><td>0.04518721   </td></tr>
+	<tr><td>1            </td><td>-0.0058045195</td><td>0.0026662398 </td><td>0.021715744  </td><td>0.01695835   </td><td>0.02703698   </td><td>0.003595671  </td><td>0.01259742   </td><td>0.09000000   </td><td>0.33800000   </td><td>...          </td><td>0.007400456  </td><td>0.02147181   </td><td>0.005443165  </td><td>0.045583447  </td><td>0.001083856  </td><td> 0.0190912200</td><td>0.005705397  </td><td>0.003578330  </td><td>0.03154213   </td><td>0.03438603   </td></tr>
+	<tr><td>1            </td><td> 0.0313804330</td><td>0.0570924850 </td><td>0.047269203  </td><td>0.04387237   </td><td>0.02690178   </td><td>0.037878251  </td><td>0.03226138   </td><td>0.01146470   </td><td>0.02436203   </td><td>...          </td><td>0.035658042  </td><td>0.01919065   </td><td>0.044963907  </td><td>0.014297094  </td><td>0.005419482  </td><td>-0.0002304543</td><td>0.027151247  </td><td>0.029029138  </td><td>0.04078212   </td><td>0.03472307   </td></tr>
+	<tr><td>1            </td><td> 0.0269493680</td><td>0.0465532830 </td><td>0.012495950  </td><td>0.04275020   </td><td>0.02778757   </td><td>0.038858944  </td><td>0.01938303   </td><td>0.01827375   </td><td>0.12000000   </td><td>...          </td><td>0.014155193  </td><td>0.01372328   </td><td>0.046840932  </td><td>0.041271348  </td><td>0.051914020  </td><td> 0.0581532340</td><td>0.039676077  </td><td>0.042518082  </td><td>0.03827971   </td><td>0.03426204   </td></tr>
 </tbody>
 </table>
 
@@ -14479,10 +14457,10 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre> num [1:30, 1:471] 1 1 1 1 1 1 2 2 2 2 ...
+<pre> num [1:30, 1:129] 1 1 1 1 1 1 1 1 1 1 ...
  - attr(*, &#34;dimnames&#34;)=List of 2
   ..$ : NULL
-  ..$ : chr [1:471] &#34;V1&#34; &#34;V2&#34; &#34;V3&#34; &#34;V4&#34; ...
+  ..$ : chr [1:129] &#34;V1&#34; &#34;V2&#34; &#34;V3&#34; &#34;V4&#34; ...
 </pre>
 </div>
 </div>
@@ -14607,60 +14585,60 @@ a.anchor-link {
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>List of 5
  $ Run  1:List of 10
-  ..$ Fold  1 : int [1:3] 2 10 21
-  ..$ Fold  2 : int [1:3] 1 9 22
-  ..$ Fold  3 : int [1:3] 3 13 19
-  ..$ Fold  4 : int [1:3] 4 15 20
-  ..$ Fold  5 : int [1:3] 5 18 29
-  ..$ Fold  6 : int [1:3] 6 16 28
-  ..$ Fold  7 : int [1:3] 11 17 26
-  ..$ Fold  8 : int [1:3] 8 14 25
-  ..$ Fold  9 : int [1:3] 12 23 27
-  ..$ Fold  10: int [1:3] 7 24 30
+  ..$ Fold  1 : int [1:3] 10 19 27
+  ..$ Fold  2 : int [1:3] 6 20 23
+  ..$ Fold  3 : int [1:3] 8 11 30
+  ..$ Fold  4 : int [1:3] 1 13 26
+  ..$ Fold  5 : int [1:3] 3 15 25
+  ..$ Fold  6 : int [1:3] 7 18 24
+  ..$ Fold  7 : int [1:3] 2 17 22
+  ..$ Fold  8 : int [1:3] 5 12 21
+  ..$ Fold  9 : int [1:3] 4 16 29
+  ..$ Fold  10: int [1:3] 9 14 28
  $ Run  2:List of 10
-  ..$ Fold  1 : int [1:3] 5 12 19
-  ..$ Fold  2 : int [1:3] 1 9 22
-  ..$ Fold  3 : int [1:3] 2 15 23
-  ..$ Fold  4 : int [1:3] 3 14 20
-  ..$ Fold  5 : int [1:3] 6 17 26
-  ..$ Fold  6 : int [1:3] 4 16 27
-  ..$ Fold  7 : int [1:3] 11 13 25
-  ..$ Fold  8 : int [1:3] 7 18 30
-  ..$ Fold  9 : int [1:3] 8 21 29
-  ..$ Fold  10: int [1:3] 10 24 28
+  ..$ Fold  1 : int [1:3] 8 20 23
+  ..$ Fold  2 : int [1:3] 9 11 21
+  ..$ Fold  3 : int [1:3] 6 17 27
+  ..$ Fold  4 : int [1:3] 4 13 29
+  ..$ Fold  5 : int [1:3] 3 12 22
+  ..$ Fold  6 : int [1:3] 5 16 30
+  ..$ Fold  7 : int [1:3] 2 19 28
+  ..$ Fold  8 : int [1:3] 1 18 26
+  ..$ Fold  9 : int [1:3] 10 14 25
+  ..$ Fold  10: int [1:3] 7 15 24
  $ Run  3:List of 10
-  ..$ Fold  1 : int [1:3] 4 12 20
-  ..$ Fold  2 : int [1:3] 1 9 19
-  ..$ Fold  3 : int [1:3] 6 17 24
-  ..$ Fold  4 : int [1:3] 3 13 22
-  ..$ Fold  5 : int [1:3] 2 16 26
-  ..$ Fold  6 : int [1:3] 5 14 29
-  ..$ Fold  7 : int [1:3] 10 15 25
-  ..$ Fold  8 : int [1:3] 7 18 27
-  ..$ Fold  9 : int [1:3] 11 21 30
-  ..$ Fold  10: int [1:3] 8 23 28
+  ..$ Fold  1 : int [1:3] 4 11 21
+  ..$ Fold  2 : int [1:3] 6 20 23
+  ..$ Fold  3 : int [1:3] 7 18 29
+  ..$ Fold  4 : int [1:3] 1 14 22
+  ..$ Fold  5 : int [1:3] 3 12 25
+  ..$ Fold  6 : int [1:3] 10 16 26
+  ..$ Fold  7 : int [1:3] 8 13 28
+  ..$ Fold  8 : int [1:3] 5 17 27
+  ..$ Fold  9 : int [1:3] 2 19 30
+  ..$ Fold  10: int [1:3] 9 15 24
  $ Run  4:List of 10
-  ..$ Fold  1 : int [1:3] 2 8 19
-  ..$ Fold  2 : int [1:3] 5 10 23
-  ..$ Fold  3 : int [1:3] 4 16 24
-  ..$ Fold  4 : int [1:3] 1 14 20
-  ..$ Fold  5 : int [1:3] 3 15 30
-  ..$ Fold  6 : int [1:3] 6 17 28
-  ..$ Fold  7 : int [1:3] 9 18 26
-  ..$ Fold  8 : int [1:3] 12 13 25
-  ..$ Fold  9 : int [1:3] 7 22 27
-  ..$ Fold  10: int [1:3] 11 21 29
+  ..$ Fold  1 : int [1:3] 5 14 28
+  ..$ Fold  2 : int [1:3] 10 17 27
+  ..$ Fold  3 : int [1:3] 3 12 23
+  ..$ Fold  4 : int [1:3] 2 13 25
+  ..$ Fold  5 : int [1:3] 8 20 30
+  ..$ Fold  6 : int [1:3] 6 18 24
+  ..$ Fold  7 : int [1:3] 1 16 22
+  ..$ Fold  8 : int [1:3] 9 15 21
+  ..$ Fold  9 : int [1:3] 7 19 26
+  ..$ Fold  10: int [1:3] 4 11 29
  $ Run  5:List of 10
-  ..$ Fold  1 : int [1:3] 5 10 19
-  ..$ Fold  2 : int [1:3] 3 12 22
-  ..$ Fold  3 : int [1:3] 1 17 23
-  ..$ Fold  4 : int [1:3] 6 16 20
-  ..$ Fold  5 : int [1:3] 4 18 26
-  ..$ Fold  6 : int [1:3] 2 15 30
-  ..$ Fold  7 : int [1:3] 7 14 28
-  ..$ Fold  8 : int [1:3] 8 13 25
-  ..$ Fold  9 : int [1:3] 11 21 29
-  ..$ Fold  10: int [1:3] 9 24 27
+  ..$ Fold  1 : int [1:3] 5 20 28
+  ..$ Fold  2 : int [1:3] 8 17 23
+  ..$ Fold  3 : int [1:3] 3 16 21
+  ..$ Fold  4 : int [1:3] 1 11 25
+  ..$ Fold  5 : int [1:3] 4 15 27
+  ..$ Fold  6 : int [1:3] 9 14 22
+  ..$ Fold  7 : int [1:3] 7 18 26
+  ..$ Fold  8 : int [1:3] 10 13 30
+  ..$ Fold  9 : int [1:3] 6 12 24
+  ..$ Fold  10: int [1:3] 2 19 29
 </pre>
 </div>
 </div>
@@ -14744,7 +14722,7 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>There are 3 major representations, raw dataset, difference taken dataset, and paa representation. For difference taken dataset 1 and 2 will be used in shift operator. At the beginning, an example code will be given to show obtained dataframes in difference datasets. For paa dataset 5 and 10 will be used in segment length parameter. At the beginning, an example code will be given to show obtained dataframes in paa datasets.</p>
+<p>There are 3 major representations, raw dataset, difference taken dataset, and paa representation. For difference taken dataset 1 and 2 will be used in shift operator. At the beginning, an example code will be given to show obtained dataframes in difference datasets. For paa dataset 4 and 8 will be used in segment length parameter. At the beginning, an example code will be given to show obtained dataframes in paa datasets.</p>
 
 </div>
 </div>
@@ -14789,12 +14767,12 @@ a.anchor-link {
 <table>
 <thead><tr><th scope=col>id</th><th scope=col>variable</th><th scope=col>value</th><th scope=col>time</th><th scope=col>diff_series</th></tr></thead>
 <tbody>
-	<tr><td>1          </td><td>V2         </td><td>-0.3629225 </td><td>1          </td><td>         NA</td></tr>
-	<tr><td>1          </td><td>V3         </td><td>-0.3653278 </td><td>2          </td><td>-0.00240529</td></tr>
-	<tr><td>1          </td><td>V4         </td><td>-0.3878120 </td><td>3          </td><td>-0.02248423</td></tr>
-	<tr><td>1          </td><td>V5         </td><td>-0.4055902 </td><td>4          </td><td>-0.01777823</td></tr>
-	<tr><td>1          </td><td>V6         </td><td>-0.3990018 </td><td>5          </td><td> 0.00658840</td></tr>
-	<tr><td>1          </td><td>V7         </td><td>-0.3665827 </td><td>6          </td><td> 0.03241913</td></tr>
+	<tr><td>1           </td><td>V2          </td><td>0.0377646330</td><td>1           </td><td>          NA</td></tr>
+	<tr><td>1           </td><td>V3          </td><td>0.0002531124</td><td>2           </td><td>-0.037511521</td></tr>
+	<tr><td>1           </td><td>V4          </td><td>0.0039770760</td><td>3           </td><td> 0.003723964</td></tr>
+	<tr><td>1           </td><td>V5          </td><td>0.0207640580</td><td>4           </td><td> 0.016786982</td></tr>
+	<tr><td>1           </td><td>V6          </td><td>0.0217311800</td><td>5           </td><td> 0.000967122</td></tr>
+	<tr><td>1           </td><td>V7          </td><td>0.1140000000</td><td>6           </td><td> 0.092268820</td></tr>
 </tbody>
 </table>
 
@@ -14837,14 +14815,14 @@ a.anchor-link {
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
 <table>
-<thead><tr><th scope=col>2</th><th scope=col>3</th><th scope=col>4</th><th scope=col>5</th><th scope=col>6</th><th scope=col>7</th><th scope=col>8</th><th scope=col>9</th><th scope=col>10</th><th scope=col>11</th><th scope=col>...</th><th scope=col>461</th><th scope=col>462</th><th scope=col>463</th><th scope=col>464</th><th scope=col>465</th><th scope=col>466</th><th scope=col>467</th><th scope=col>468</th><th scope=col>469</th><th scope=col>470</th></tr></thead>
+<thead><tr><th scope=col>2</th><th scope=col>3</th><th scope=col>4</th><th scope=col>5</th><th scope=col>6</th><th scope=col>7</th><th scope=col>8</th><th scope=col>9</th><th scope=col>10</th><th scope=col>11</th><th scope=col>...</th><th scope=col>119</th><th scope=col>120</th><th scope=col>121</th><th scope=col>122</th><th scope=col>123</th><th scope=col>124</th><th scope=col>125</th><th scope=col>126</th><th scope=col>127</th><th scope=col>128</th></tr></thead>
 <tbody>
-	<tr><td>-0.002405290</td><td>-0.02248423 </td><td>-0.01777823 </td><td> 0.00658840 </td><td>0.03241913  </td><td>0.04204029  </td><td> 0.00721587 </td><td>-0.009202850</td><td>0.021647610 </td><td>0.02771313  </td><td>...         </td><td> 0.001150300</td><td> 0.003346500</td><td>-0.000104500</td><td>-0.026876600</td><td>-0.004183100</td><td> 0.022275100</td><td> 0.01349060 </td><td> 0.00847080 </td><td>-0.003869400</td><td>-0.021020200</td></tr>
-	<tr><td>-0.000147610</td><td> 0.01099662 </td><td> 0.01564619 </td><td> 0.02461324 </td><td>0.01435465  </td><td>0.01129183  </td><td> 0.01313690 </td><td> 0.003800845</td><td>0.009299153 </td><td>0.01572000  </td><td>...         </td><td>-0.000295211</td><td>-0.001955774</td><td>-0.007564788</td><td>-0.007786196</td><td>-0.001439155</td><td>-0.004354365</td><td>-0.01088591 </td><td>-0.01099662 </td><td> 0.006162535</td><td>-0.004317465</td></tr>
-	<tr><td>-0.001765700</td><td> 0.00298610 </td><td> 0.00804951 </td><td> 0.01259358 </td><td>0.01002293  </td><td>0.01506037  </td><td> 0.00984117 </td><td> 0.006050110</td><td>0.012152160 </td><td>0.02269441  </td><td>...         </td><td>-0.002778380</td><td>-0.003920890</td><td>-0.003089970</td><td> 0.000701090</td><td>-0.005920280</td><td>-0.005349030</td><td>-0.00553079 </td><td>-0.00327178 </td><td> 0.000077900</td><td>-0.007867700</td></tr>
-	<tr><td> 0.008447077</td><td> 0.01504793 </td><td> 0.01138079 </td><td> 0.01750112 </td><td>0.01294881  </td><td>0.01502264  </td><td> 0.01282236 </td><td> 0.002908424</td><td>0.007258415 </td><td>0.01256945  </td><td>...         </td><td>-0.007384870</td><td>-0.005715690</td><td>-0.000177030</td><td> 0.001340400</td><td>-0.004527020</td><td>-0.003743020</td><td>-0.00341424 </td><td>-0.00541219 </td><td> 0.000505810</td><td>-0.005538650</td></tr>
-	<tr><td> 0.011131410</td><td> 0.01903387 </td><td> 0.02362238 </td><td> 0.03326678 </td><td>0.01580490  </td><td>0.02574670  </td><td> 0.03798275 </td><td> 0.016229767</td><td>0.016059823 </td><td>0.03662319  </td><td>...         </td><td>-0.002846580</td><td>-0.004588520</td><td>-0.003059020</td><td>-0.012363510</td><td>-0.003866250</td><td>-0.002464210</td><td>-0.01758933 </td><td>-0.00909207 </td><td> 0.011471300</td><td>-0.012193560</td></tr>
-	<tr><td>-0.016387700</td><td>-0.03062227 </td><td>-0.00765556 </td><td>-0.00191389 </td><td>0.02260784  </td><td>0.01303839  </td><td>-0.01698579 </td><td>-0.003588550</td><td>0.008732130 </td><td>0.01758388  </td><td>...         </td><td>-0.016746500</td><td> 0.005023900</td><td>-0.002870800</td><td>-0.030981100</td><td> 0.003229700</td><td> 0.008851700</td><td> 0.00370820 </td><td> 0.02679450 </td><td>-0.002153200</td><td>-0.015071900</td></tr>
+	<tr><td>-0.037511521</td><td> 0.003723964</td><td> 0.016786982</td><td> 0.000967122</td><td> 0.092268820</td><td> 0.300000000</td><td> 0.304000000</td><td>0.17100000  </td><td> 0.08000000 </td><td> 0.03300000 </td><td>...         </td><td> 0.015133234</td><td>-0.011377629</td><td>-0.009443586</td><td> 0.025519562</td><td> 0.000280744</td><td> 0.014429013</td><td> 0.001056311</td><td>-0.023149859</td><td> 0.008264213</td><td>-0.019126568</td></tr>
+	<tr><td> 0.020556942</td><td>-0.018455991</td><td> 0.017591693</td><td> 0.016956416</td><td>-0.002291931</td><td> 0.048217989</td><td> 0.234000000</td><td>0.23300000  </td><td> 0.13000000 </td><td>-0.02700000 </td><td>...         </td><td> 0.007019978</td><td>-0.025736393</td><td> 0.013812700</td><td> 0.019324169</td><td>-0.000888445</td><td> 0.000687149</td><td>-0.022396647</td><td>-0.013977540</td><td> 0.021405171</td><td>-0.007356809</td></tr>
+	<tr><td>-0.016179174</td><td> 0.031400853</td><td>-0.023532115</td><td> 0.115454676</td><td> 0.335000000</td><td> 0.335000000</td><td> 0.188000000</td><td>0.08900000  </td><td>-0.09100000 </td><td>-0.32400000 </td><td>...         </td><td> 0.023940894</td><td>-0.026179138</td><td> 0.028973513</td><td>-0.040942481</td><td> 0.013779004</td><td> 0.002096286</td><td>-0.002912475</td><td> 0.003799242</td><td> 0.009724722</td><td> 0.012983624</td></tr>
+	<tr><td> 0.008470759</td><td> 0.019049504</td><td>-0.004757391</td><td> 0.010078628</td><td>-0.023441310</td><td> 0.009001748</td><td> 0.077402581</td><td>0.24800000  </td><td> 0.24300000 </td><td> 0.13100000 </td><td>...         </td><td>-0.015041910</td><td> 0.014071350</td><td>-0.016028641</td><td> 0.040140282</td><td>-0.044499591</td><td> 0.018007364</td><td>-0.013385823</td><td>-0.002127067</td><td> 0.027963798</td><td> 0.002843902</td></tr>
+	<tr><td> 0.025712052</td><td>-0.009823282</td><td>-0.003396833</td><td>-0.016970592</td><td> 0.010976473</td><td>-0.005616872</td><td>-0.020796678</td><td>0.01289733  </td><td> 0.01472031 </td><td> 0.06691766 </td><td>...         </td><td> 0.014433514</td><td>-0.016467389</td><td> 0.025773254</td><td>-0.030666813</td><td>-0.008877612</td><td>-0.005649936</td><td> 0.027381701</td><td> 0.001877891</td><td> 0.011752984</td><td>-0.006059050</td></tr>
+	<tr><td> 0.019603915</td><td>-0.034057333</td><td> 0.030254248</td><td>-0.014962628</td><td> 0.011071374</td><td>-0.019475918</td><td>-0.001109278</td><td>0.10172625  </td><td> 0.31400000 </td><td> 0.31300000 </td><td>...         </td><td>-0.029374361</td><td>-0.000431908</td><td> 0.033117647</td><td>-0.005569584</td><td> 0.010642672</td><td> 0.006239214</td><td>-0.018477157</td><td> 0.002842005</td><td>-0.004238373</td><td>-0.004017664</td></tr>
 </tbody>
 </table>
 
@@ -15063,38 +15041,38 @@ a.anchor-link {
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
 <table>
-<thead><tr><th scope=col>V1</th><th scope=col>V2</th><th scope=col>V3</th><th scope=col>V4</th><th scope=col>V5</th><th scope=col>V6</th><th scope=col>V7</th><th scope=col>V8</th><th scope=col>V9</th><th scope=col>V10</th><th scope=col>...</th><th scope=col>V461</th><th scope=col>V462</th><th scope=col>V463</th><th scope=col>V464</th><th scope=col>V465</th><th scope=col>V466</th><th scope=col>V467</th><th scope=col>V468</th><th scope=col>V469</th><th scope=col>V470</th></tr></thead>
+<thead><tr><th scope=col>V1</th><th scope=col>V2</th><th scope=col>V3</th><th scope=col>V4</th><th scope=col>V5</th><th scope=col>V6</th><th scope=col>V7</th><th scope=col>V8</th><th scope=col>V9</th><th scope=col>V10</th><th scope=col>...</th><th scope=col>V119</th><th scope=col>V120</th><th scope=col>V121</th><th scope=col>V122</th><th scope=col>V123</th><th scope=col>V124</th><th scope=col>V125</th><th scope=col>V126</th><th scope=col>V127</th><th scope=col>V128</th></tr></thead>
 <tbody>
-	<tr><td>-0.38413086 </td><td>-0.38413086 </td><td>-0.38413086 </td><td>-0.38413086 </td><td>-0.38413086 </td><td>-0.327972564</td><td>-0.327972564</td><td>-0.327972564</td><td>-0.327972564</td><td>-0.327972564</td><td>...         </td><td>-1.86160656 </td><td>-1.86160656 </td><td>-1.86160656 </td><td>-1.86160656 </td><td>-1.86160656 </td><td>-1.84805324 </td><td>-1.84805324 </td><td>-1.84805324 </td><td>-1.84805324 </td><td>-1.84805324 </td></tr>
-	<tr><td>-0.09861947 </td><td>-0.09861947 </td><td>-0.09861947 </td><td>-0.09861947 </td><td>-0.09861947 </td><td>-0.030521622</td><td>-0.030521622</td><td>-0.030521622</td><td>-0.030521622</td><td>-0.030521622</td><td>...         </td><td>-0.02345869 </td><td>-0.02345869 </td><td>-0.02345869 </td><td>-0.02345869 </td><td>-0.02345869 </td><td>-0.05075835 </td><td>-0.05075835 </td><td>-0.05075835 </td><td>-0.05075835 </td><td>-0.05075835 </td></tr>
-	<tr><td>-0.17319911 </td><td>-0.17319911 </td><td>-0.17319911 </td><td>-0.17319911 </td><td>-0.17319911 </td><td>-0.124626836</td><td>-0.124626836</td><td>-0.124626836</td><td>-0.124626836</td><td>-0.124626836</td><td>...         </td><td>-0.98073586 </td><td>-0.98073586 </td><td>-0.98073586 </td><td>-0.98073586 </td><td>-0.98073586 </td><td>-1.00035071 </td><td>-1.00035071 </td><td>-1.00035071 </td><td>-1.00035071 </td><td>-1.00035071 </td></tr>
-	<tr><td>-0.07991795 </td><td>-0.07991795 </td><td>-0.07991795 </td><td>-0.07991795 </td><td>-0.07991795 </td><td>-0.016104597</td><td>-0.016104597</td><td>-0.016104597</td><td>-0.016104597</td><td>-0.016104597</td><td>...         </td><td> 0.37209666 </td><td> 0.37209666 </td><td> 0.37209666 </td><td> 0.37209666 </td><td> 0.37209666 </td><td> 0.35743820 </td><td> 0.35743820 </td><td> 0.35743820 </td><td> 0.35743820 </td><td> 0.35743820 </td></tr>
-	<tr><td>-0.17167187 </td><td>-0.17167187 </td><td>-0.17167187 </td><td>-0.17167187 </td><td>-0.17167187 </td><td>-0.052149406</td><td>-0.052149406</td><td>-0.052149406</td><td>-0.052149406</td><td>-0.052149406</td><td>...         </td><td>-0.93781037 </td><td>-0.93781037 </td><td>-0.93781037 </td><td>-0.93781037 </td><td>-0.93781037 </td><td>-0.97030390 </td><td>-0.97030390 </td><td>-0.97030390 </td><td>-0.97030390 </td><td>-0.97030390 </td></tr>
-	<tr><td>-0.46294774 </td><td>-0.46294774 </td><td>-0.46294774 </td><td>-0.46294774 </td><td>-0.46294774 </td><td>-0.461440556</td><td>-0.461440556</td><td>-0.461440556</td><td>-0.461440556</td><td>-0.461440556</td><td>...         </td><td>-1.80374846 </td><td>-1.80374846 </td><td>-1.80374846 </td><td>-1.80374846 </td><td>-1.80374846 </td><td>-1.79587760 </td><td>-1.79587760 </td><td>-1.79587760 </td><td>-1.79587760 </td><td>-1.79587760 </td></tr>
-	<tr><td>-0.25753801 </td><td>-0.25753801 </td><td>-0.25753801 </td><td>-0.25753801 </td><td>-0.25753801 </td><td>-0.264602712</td><td>-0.264602712</td><td>-0.264602712</td><td>-0.264602712</td><td>-0.264602712</td><td>...         </td><td>-1.86876802 </td><td>-1.86876802 </td><td>-1.86876802 </td><td>-1.86876802 </td><td>-1.86876802 </td><td>-1.86652070 </td><td>-1.86652070 </td><td>-1.86652070 </td><td>-1.86652070 </td><td>-1.86652070 </td></tr>
-	<tr><td>-0.25570127 </td><td>-0.25570127 </td><td>-0.25570127 </td><td>-0.25570127 </td><td>-0.25570127 </td><td>-0.247961676</td><td>-0.247961676</td><td>-0.247961676</td><td>-0.247961676</td><td>-0.247961676</td><td>...         </td><td>-1.67321354 </td><td>-1.67321354 </td><td>-1.67321354 </td><td>-1.67321354 </td><td>-1.67321354 </td><td>-1.66747398 </td><td>-1.66747398 </td><td>-1.66747398 </td><td>-1.66747398 </td><td>-1.66747398 </td></tr>
-	<tr><td>-0.28052244 </td><td>-0.28052244 </td><td>-0.28052244 </td><td>-0.28052244 </td><td>-0.28052244 </td><td>-0.260379090</td><td>-0.260379090</td><td>-0.260379090</td><td>-0.260379090</td><td>-0.260379090</td><td>...         </td><td>-2.01081034 </td><td>-2.01081034 </td><td>-2.01081034 </td><td>-2.01081034 </td><td>-2.01081034 </td><td>-2.00416586 </td><td>-2.00416586 </td><td>-2.00416586 </td><td>-2.00416586 </td><td>-2.00416586 </td></tr>
-	<tr><td>-0.18944863 </td><td>-0.18944863 </td><td>-0.18944863 </td><td>-0.18944863 </td><td>-0.18944863 </td><td>-0.159592326</td><td>-0.159592326</td><td>-0.159592326</td><td>-0.159592326</td><td>-0.159592326</td><td>...         </td><td>-2.01370996 </td><td>-2.01370996 </td><td>-2.01370996 </td><td>-2.01370996 </td><td>-2.01370996 </td><td>-2.01355066 </td><td>-2.01355066 </td><td>-2.01355066 </td><td>-2.01355066 </td><td>-2.01355066 </td></tr>
-	<tr><td>-0.19202037 </td><td>-0.19202037 </td><td>-0.19202037 </td><td>-0.19202037 </td><td>-0.19202037 </td><td>-0.175961914</td><td>-0.175961914</td><td>-0.175961914</td><td>-0.175961914</td><td>-0.175961914</td><td>...         </td><td>-1.60925826 </td><td>-1.60925826 </td><td>-1.60925826 </td><td>-1.60925826 </td><td>-1.60925826 </td><td>-1.60810800 </td><td>-1.60810800 </td><td>-1.60810800 </td><td>-1.60810800 </td><td>-1.60810800 </td></tr>
-	<tr><td>-0.22882250 </td><td>-0.22882250 </td><td>-0.22882250 </td><td>-0.22882250 </td><td>-0.22882250 </td><td>-0.265533176</td><td>-0.265533176</td><td>-0.265533176</td><td>-0.265533176</td><td>-0.265533176</td><td>...         </td><td>-1.60002582 </td><td>-1.60002582 </td><td>-1.60002582 </td><td>-1.60002582 </td><td>-1.60002582 </td><td>-1.59761924 </td><td>-1.59761924 </td><td>-1.59761924 </td><td>-1.59761924 </td><td>-1.59761924 </td></tr>
-	<tr><td>-0.31626129 </td><td>-0.31626129 </td><td>-0.31626129 </td><td>-0.31626129 </td><td>-0.31626129 </td><td>-0.320899336</td><td>-0.320899336</td><td>-0.320899336</td><td>-0.320899336</td><td>-0.320899336</td><td>...         </td><td>-1.95810144 </td><td>-1.95810144 </td><td>-1.95810144 </td><td>-1.95810144 </td><td>-1.95810144 </td><td>-1.96073064 </td><td>-1.96073064 </td><td>-1.96073064 </td><td>-1.96073064 </td><td>-1.96073064 </td></tr>
-	<tr><td>-0.20646227 </td><td>-0.20646227 </td><td>-0.20646227 </td><td>-0.20646227 </td><td>-0.20646227 </td><td>-0.221173468</td><td>-0.221173468</td><td>-0.221173468</td><td>-0.221173468</td><td>-0.221173468</td><td>...         </td><td>-1.59403074 </td><td>-1.59403074 </td><td>-1.59403074 </td><td>-1.59403074 </td><td>-1.59403074 </td><td>-1.59396808 </td><td>-1.59396808 </td><td>-1.59396808 </td><td>-1.59396808 </td><td>-1.59396808 </td></tr>
-	<tr><td>-0.18604193 </td><td>-0.18604193 </td><td>-0.18604193 </td><td>-0.18604193 </td><td>-0.18604193 </td><td>-0.196958502</td><td>-0.196958502</td><td>-0.196958502</td><td>-0.196958502</td><td>-0.196958502</td><td>...         </td><td>-1.94680844 </td><td>-1.94680844 </td><td>-1.94680844 </td><td>-1.94680844 </td><td>-1.94680844 </td><td>-1.94985132 </td><td>-1.94985132 </td><td>-1.94985132 </td><td>-1.94985132 </td><td>-1.94985132 </td></tr>
-	<tr><td>-0.22612721 </td><td>-0.22612721 </td><td>-0.22612721 </td><td>-0.22612721 </td><td>-0.22612721 </td><td>-0.219193672</td><td>-0.219193672</td><td>-0.219193672</td><td>-0.219193672</td><td>-0.219193672</td><td>...         </td><td>-1.95537622 </td><td>-1.95537622 </td><td>-1.95537622 </td><td>-1.95537622 </td><td>-1.95537622 </td><td>-1.94685760 </td><td>-1.94685760 </td><td>-1.94685760 </td><td>-1.94685760 </td><td>-1.94685760 </td></tr>
-	<tr><td>-0.18181536 </td><td>-0.18181536 </td><td>-0.18181536 </td><td>-0.18181536 </td><td>-0.18181536 </td><td>-0.167255894</td><td>-0.167255894</td><td>-0.167255894</td><td>-0.167255894</td><td>-0.167255894</td><td>...         </td><td>-1.60528908 </td><td>-1.60528908 </td><td>-1.60528908 </td><td>-1.60528908 </td><td>-1.60528908 </td><td>-1.59923804 </td><td>-1.59923804 </td><td>-1.59923804 </td><td>-1.59923804 </td><td>-1.59923804 </td></tr>
-	<tr><td>-0.26653366 </td><td>-0.26653366 </td><td>-0.26653366 </td><td>-0.26653366 </td><td>-0.26653366 </td><td>-0.298488746</td><td>-0.298488746</td><td>-0.298488746</td><td>-0.298488746</td><td>-0.298488746</td><td>...         </td><td>-1.65846048 </td><td>-1.65846048 </td><td>-1.65846048 </td><td>-1.65846048 </td><td>-1.65846048 </td><td>-1.65940526 </td><td>-1.65940526 </td><td>-1.65940526 </td><td>-1.65940526 </td><td>-1.65940526 </td></tr>
-	<tr><td>-0.15269584 </td><td>-0.15269584 </td><td>-0.15269584 </td><td>-0.15269584 </td><td>-0.15269584 </td><td>-0.130703367</td><td>-0.130703367</td><td>-0.130703367</td><td>-0.130703367</td><td>-0.130703367</td><td>...         </td><td>-2.00401990 </td><td>-2.00401990 </td><td>-2.00401990 </td><td>-2.00401990 </td><td>-2.00401990 </td><td>-2.00368614 </td><td>-2.00368614 </td><td>-2.00368614 </td><td>-2.00368614 </td><td>-2.00368614 </td></tr>
-	<tr><td>-0.17255396 </td><td>-0.17255396 </td><td>-0.17255396 </td><td>-0.17255396 </td><td>-0.17255396 </td><td>-0.158345292</td><td>-0.158345292</td><td>-0.158345292</td><td>-0.158345292</td><td>-0.158345292</td><td>...         </td><td>-1.72826338 </td><td>-1.72826338 </td><td>-1.72826338 </td><td>-1.72826338 </td><td>-1.72826338 </td><td>-1.72124840 </td><td>-1.72124840 </td><td>-1.72124840 </td><td>-1.72124840 </td><td>-1.72124840 </td></tr>
-	<tr><td>-0.10343856 </td><td>-0.10343856 </td><td>-0.10343856 </td><td>-0.10343856 </td><td>-0.10343856 </td><td>-0.057660172</td><td>-0.057660172</td><td>-0.057660172</td><td>-0.057660172</td><td>-0.057660172</td><td>...         </td><td>-2.03815900 </td><td>-2.03815900 </td><td>-2.03815900 </td><td>-2.03815900 </td><td>-2.03815900 </td><td>-2.04331212 </td><td>-2.04331212 </td><td>-2.04331212 </td><td>-2.04331212 </td><td>-2.04331212 </td></tr>
-	<tr><td>-0.04941248 </td><td>-0.04941248 </td><td>-0.04941248 </td><td>-0.04941248 </td><td>-0.04941248 </td><td> 0.003359417</td><td> 0.003359417</td><td> 0.003359417</td><td> 0.003359417</td><td> 0.003359417</td><td>...         </td><td>-1.95263298 </td><td>-1.95263298 </td><td>-1.95263298 </td><td>-1.95263298 </td><td>-1.95263298 </td><td>-1.95091208 </td><td>-1.95091208 </td><td>-1.95091208 </td><td>-1.95091208 </td><td>-1.95091208 </td></tr>
-	<tr><td> 0.05460818 </td><td> 0.05460818 </td><td> 0.05460818 </td><td> 0.05460818 </td><td> 0.05460818 </td><td> 0.174882928</td><td> 0.174882928</td><td> 0.174882928</td><td> 0.174882928</td><td> 0.174882928</td><td>...         </td><td>-1.75088490 </td><td>-1.75088490 </td><td>-1.75088490 </td><td>-1.75088490 </td><td>-1.75088490 </td><td>-1.74590878 </td><td>-1.74590878 </td><td>-1.74590878 </td><td>-1.74590878 </td><td>-1.74590878 </td></tr>
-	<tr><td>-0.06595101 </td><td>-0.06595101 </td><td>-0.06595101 </td><td>-0.06595101 </td><td>-0.06595101 </td><td>-0.014937715</td><td>-0.014937715</td><td>-0.014937715</td><td>-0.014937715</td><td>-0.014937715</td><td>...         </td><td>-1.78251956 </td><td>-1.78251956 </td><td>-1.78251956 </td><td>-1.78251956 </td><td>-1.78251956 </td><td>-1.78235736 </td><td>-1.78235736 </td><td>-1.78235736 </td><td>-1.78235736 </td><td>-1.78235736 </td></tr>
-	<tr><td>-0.26355191 </td><td>-0.26355191 </td><td>-0.26355191 </td><td>-0.26355191 </td><td>-0.26355191 </td><td>-0.269362364</td><td>-0.269362364</td><td>-0.269362364</td><td>-0.269362364</td><td>-0.269362364</td><td>...         </td><td>-1.95223288 </td><td>-1.95223288 </td><td>-1.95223288 </td><td>-1.95223288 </td><td>-1.95223288 </td><td>-1.95356254 </td><td>-1.95356254 </td><td>-1.95356254 </td><td>-1.95356254 </td><td>-1.95356254 </td></tr>
-	<tr><td>-0.22896245 </td><td>-0.22896245 </td><td>-0.22896245 </td><td>-0.22896245 </td><td>-0.22896245 </td><td>-0.248023498</td><td>-0.248023498</td><td>-0.248023498</td><td>-0.248023498</td><td>-0.248023498</td><td>...         </td><td>-1.60744780 </td><td>-1.60744780 </td><td>-1.60744780 </td><td>-1.60744780 </td><td>-1.60744780 </td><td>-1.60818660 </td><td>-1.60818660 </td><td>-1.60818660 </td><td>-1.60818660 </td><td>-1.60818660 </td></tr>
-	<tr><td>-0.21884517 </td><td>-0.21884517 </td><td>-0.21884517 </td><td>-0.21884517 </td><td>-0.21884517 </td><td>-0.223305664</td><td>-0.223305664</td><td>-0.223305664</td><td>-0.223305664</td><td>-0.223305664</td><td>...         </td><td>-1.96944308 </td><td>-1.96944308 </td><td>-1.96944308 </td><td>-1.96944308 </td><td>-1.96944308 </td><td>-1.97052060 </td><td>-1.97052060 </td><td>-1.97052060 </td><td>-1.97052060 </td><td>-1.97052060 </td></tr>
-	<tr><td>-0.19961289 </td><td>-0.19961289 </td><td>-0.19961289 </td><td>-0.19961289 </td><td>-0.19961289 </td><td>-0.169711098</td><td>-0.169711098</td><td>-0.169711098</td><td>-0.169711098</td><td>-0.169711098</td><td>...         </td><td>-2.01514914 </td><td>-2.01514914 </td><td>-2.01514914 </td><td>-2.01514914 </td><td>-2.01514914 </td><td>-2.01504218 </td><td>-2.01504218 </td><td>-2.01504218 </td><td>-2.01504218 </td><td>-2.01504218 </td></tr>
-	<tr><td>-0.23489132 </td><td>-0.23489132 </td><td>-0.23489132 </td><td>-0.23489132 </td><td>-0.23489132 </td><td>-0.211246228</td><td>-0.211246228</td><td>-0.211246228</td><td>-0.211246228</td><td>-0.211246228</td><td>...         </td><td>-1.68059600 </td><td>-1.68059600 </td><td>-1.68059600 </td><td>-1.68059600 </td><td>-1.68059600 </td><td>-1.67452854 </td><td>-1.67452854 </td><td>-1.67452854 </td><td>-1.67452854 </td><td>-1.67452854 </td></tr>
-	<tr><td>-0.22609111 </td><td>-0.22609111 </td><td>-0.22609111 </td><td>-0.22609111 </td><td>-0.22609111 </td><td>-0.267278418</td><td>-0.267278418</td><td>-0.267278418</td><td>-0.267278418</td><td>-0.267278418</td><td>...         </td><td>-1.61006320 </td><td>-1.61006320 </td><td>-1.61006320 </td><td>-1.61006320 </td><td>-1.61006320 </td><td>-1.61039268 </td><td>-1.61039268 </td><td>-1.61039268 </td><td>-1.61039268 </td><td>-1.61039268 </td></tr>
+	<tr><td>0.0168980119</td><td>0.0168980119</td><td>0.0168980119</td><td>0.0168980119</td><td>0.0168980119</td><td>0.620800000 </td><td>0.620800000 </td><td>0.620800000 </td><td>0.620800000 </td><td>0.620800000 </td><td>...         </td><td>0.02895437  </td><td>0.02895437  </td><td>0.03995435  </td><td>0.03995435  </td><td>0.03995435  </td><td>0.03995435  </td><td>0.03995435  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0162248013</td><td>0.0162248013</td><td>0.0162248013</td><td>0.0162248013</td><td>0.0162248013</td><td>0.332956402 </td><td>0.332956402 </td><td>0.332956402 </td><td>0.332956402 </td><td>0.332956402 </td><td>...         </td><td>0.03060810  </td><td>0.03060810  </td><td>0.03576214  </td><td>0.03576214  </td><td>0.03576214  </td><td>0.03576214  </td><td>0.03576214  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0394310218</td><td>0.0394310218</td><td>0.0394310218</td><td>0.0394310218</td><td>0.0394310218</td><td>0.860200000 </td><td>0.860200000 </td><td>0.860200000 </td><td>0.860200000 </td><td>0.860200000 </td><td>...         </td><td>0.03425886  </td><td>0.03425886  </td><td>0.02242872  </td><td>0.02242872  </td><td>0.02242872  </td><td>0.02242872  </td><td>0.02242872  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0125145597</td><td>0.0125145597</td><td>0.0125145597</td><td>0.0125145597</td><td>0.0125145597</td><td>0.205038618 </td><td>0.205038618 </td><td>0.205038618 </td><td>0.205038618 </td><td>0.205038618 </td><td>...         </td><td>0.01669614  </td><td>0.01669614  </td><td>0.01538142  </td><td>0.01538142  </td><td>0.01538142  </td><td>0.01538142  </td><td>0.01538142  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0413032538</td><td>0.0413032538</td><td>0.0413032538</td><td>0.0413032538</td><td>0.0413032538</td><td>0.029009739 </td><td>0.029009739 </td><td>0.029009739 </td><td>0.029009739 </td><td>0.029009739 </td><td>...         </td><td>0.02115875  </td><td>0.02115875  </td><td>0.01832026  </td><td>0.01832026  </td><td>0.01832026  </td><td>0.01832026  </td><td>0.01832026  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0313072738</td><td>0.0313072738</td><td>0.0313072738</td><td>0.0313072738</td><td>0.0313072738</td><td>0.126103144 </td><td>0.126103144 </td><td>0.126103144 </td><td>0.126103144 </td><td>0.126103144 </td><td>...         </td><td>0.02361924  </td><td>0.02361924  </td><td>0.04757112  </td><td>0.04757112  </td><td>0.04757112  </td><td>0.04757112  </td><td>0.04757112  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0294146025</td><td>0.0294146025</td><td>0.0294146025</td><td>0.0294146025</td><td>0.0294146025</td><td>0.018427795 </td><td>0.018427795 </td><td>0.018427795 </td><td>0.018427795 </td><td>0.018427795 </td><td>...         </td><td>0.02034330  </td><td>0.02034330  </td><td>0.03349451  </td><td>0.03349451  </td><td>0.03349451  </td><td>0.03349451  </td><td>0.03349451  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0113078153</td><td>0.0113078153</td><td>0.0113078153</td><td>0.0113078153</td><td>0.0113078153</td><td>0.128904942 </td><td>0.128904942 </td><td>0.128904942 </td><td>0.128904942 </td><td>0.128904942 </td><td>...         </td><td>0.03616909  </td><td>0.03616909  </td><td>0.03875980  </td><td>0.03875980  </td><td>0.03875980  </td><td>0.03875980  </td><td>0.03875980  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0307588139</td><td>0.0307588139</td><td>0.0307588139</td><td>0.0307588139</td><td>0.0307588139</td><td>0.460328199 </td><td>0.460328199 </td><td>0.460328199 </td><td>0.460328199 </td><td>0.460328199 </td><td>...         </td><td>0.02593722  </td><td>0.02593722  </td><td>0.02463345  </td><td>0.02463345  </td><td>0.02463345  </td><td>0.02463345  </td><td>0.02463345  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0288568120</td><td>0.0288568120</td><td>0.0288568120</td><td>0.0288568120</td><td>0.0288568120</td><td>0.128333054 </td><td>0.128333054 </td><td>0.128333054 </td><td>0.128333054 </td><td>0.128333054 </td><td>...         </td><td>0.03006264  </td><td>0.03006264  </td><td>0.02712369  </td><td>0.02712369  </td><td>0.02712369  </td><td>0.02712369  </td><td>0.02712369  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0177754415</td><td>0.0177754415</td><td>0.0177754415</td><td>0.0177754415</td><td>0.0177754415</td><td>0.014398848 </td><td>0.014398848 </td><td>0.014398848 </td><td>0.014398848 </td><td>0.014398848 </td><td>...         </td><td>0.02723155  </td><td>0.02723155  </td><td>0.03432022  </td><td>0.03432022  </td><td>0.03432022  </td><td>0.03432022  </td><td>0.03432022  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0154187540</td><td>0.0154187540</td><td>0.0154187540</td><td>0.0154187540</td><td>0.0154187540</td><td>0.015753976 </td><td>0.015753976 </td><td>0.015753976 </td><td>0.015753976 </td><td>0.015753976 </td><td>...         </td><td>0.02294538  </td><td>0.02294538  </td><td>0.02350121  </td><td>0.02350121  </td><td>0.02350121  </td><td>0.02350121  </td><td>0.02350121  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0268055453</td><td>0.0268055453</td><td>0.0268055453</td><td>0.0268055453</td><td>0.0268055453</td><td>0.025169922 </td><td>0.025169922 </td><td>0.025169922 </td><td>0.025169922 </td><td>0.025169922 </td><td>...         </td><td>0.03039062  </td><td>0.03039062  </td><td>0.02287421  </td><td>0.02287421  </td><td>0.02287421  </td><td>0.02287421  </td><td>0.02287421  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0192343094</td><td>0.0192343094</td><td>0.0192343094</td><td>0.0192343094</td><td>0.0192343094</td><td>0.012807037 </td><td>0.012807037 </td><td>0.012807037 </td><td>0.012807037 </td><td>0.012807037 </td><td>...         </td><td>0.02163751  </td><td>0.02163751  </td><td>0.02360917  </td><td>0.02360917  </td><td>0.02360917  </td><td>0.02360917  </td><td>0.02360917  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0222852607</td><td>0.0222852607</td><td>0.0222852607</td><td>0.0222852607</td><td>0.0222852607</td><td>0.021170342 </td><td>0.021170342 </td><td>0.021170342 </td><td>0.021170342 </td><td>0.021170342 </td><td>...         </td><td>0.02412494  </td><td>0.02412494  </td><td>0.03792936  </td><td>0.03792936  </td><td>0.03792936  </td><td>0.03792936  </td><td>0.03792936  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0362657190</td><td>0.0362657190</td><td>0.0362657190</td><td>0.0362657190</td><td>0.0362657190</td><td>0.017531538 </td><td>0.017531538 </td><td>0.017531538 </td><td>0.017531538 </td><td>0.017531538 </td><td>...         </td><td>0.01124889  </td><td>0.01124889  </td><td>0.02296966  </td><td>0.02296966  </td><td>0.02296966  </td><td>0.02296966  </td><td>0.02296966  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0163688964</td><td>0.0163688964</td><td>0.0163688964</td><td>0.0163688964</td><td>0.0163688964</td><td>0.017356786 </td><td>0.017356786 </td><td>0.017356786 </td><td>0.017356786 </td><td>0.017356786 </td><td>...         </td><td>0.02963157  </td><td>0.02963157  </td><td>0.01512957  </td><td>0.01512957  </td><td>0.01512957  </td><td>0.01512957  </td><td>0.01512957  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0229478896</td><td>0.0229478896</td><td>0.0229478896</td><td>0.0229478896</td><td>0.0229478896</td><td>0.013251879 </td><td>0.013251879 </td><td>0.013251879 </td><td>0.013251879 </td><td>0.013251879 </td><td>...         </td><td>0.02812540  </td><td>0.02812540  </td><td>0.01385494  </td><td>0.01385494  </td><td>0.01385494  </td><td>0.01385494  </td><td>0.01385494  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0194247693</td><td>0.0194247693</td><td>0.0194247693</td><td>0.0194247693</td><td>0.0194247693</td><td>0.016890873 </td><td>0.016890873 </td><td>0.016890873 </td><td>0.016890873 </td><td>0.016890873 </td><td>...         </td><td>0.02509704  </td><td>0.02509704  </td><td>0.02626674  </td><td>0.02626674  </td><td>0.02626674  </td><td>0.02626674  </td><td>0.02626674  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0303694235</td><td>0.0303694235</td><td>0.0303694235</td><td>0.0303694235</td><td>0.0303694235</td><td>0.017075563 </td><td>0.017075563 </td><td>0.017075563 </td><td>0.017075563 </td><td>0.017075563 </td><td>...         </td><td>0.02610631  </td><td>0.02610631  </td><td>0.02132071  </td><td>0.02132071  </td><td>0.02132071  </td><td>0.02132071  </td><td>0.02132071  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0186244703</td><td>0.0186244703</td><td>0.0186244703</td><td>0.0186244703</td><td>0.0186244703</td><td>0.015271937 </td><td>0.015271937 </td><td>0.015271937 </td><td>0.015271937 </td><td>0.015271937 </td><td>...         </td><td>0.46140000  </td><td>0.46140000  </td><td>0.17626058  </td><td>0.17626058  </td><td>0.17626058  </td><td>0.17626058  </td><td>0.17626058  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0189977288</td><td>0.0189977288</td><td>0.0189977288</td><td>0.0189977288</td><td>0.0189977288</td><td>0.019156852 </td><td>0.019156852 </td><td>0.019156852 </td><td>0.019156852 </td><td>0.019156852 </td><td>...         </td><td>0.18527348  </td><td>0.18527348  </td><td>0.03274235  </td><td>0.03274235  </td><td>0.03274235  </td><td>0.03274235  </td><td>0.03274235  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0244386866</td><td>0.0244386866</td><td>0.0244386866</td><td>0.0244386866</td><td>0.0244386866</td><td>0.017426962 </td><td>0.017426962 </td><td>0.017426962 </td><td>0.017426962 </td><td>0.017426962 </td><td>...         </td><td>0.43740000  </td><td>0.43740000  </td><td>0.02787224  </td><td>0.02787224  </td><td>0.02787224  </td><td>0.02787224  </td><td>0.02787224  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0161873084</td><td>0.0161873084</td><td>0.0161873084</td><td>0.0161873084</td><td>0.0161873084</td><td>0.028115100 </td><td>0.028115100 </td><td>0.028115100 </td><td>0.028115100 </td><td>0.028115100 </td><td>...         </td><td>0.77360000  </td><td>0.77360000  </td><td>0.05074452  </td><td>0.05074452  </td><td>0.05074452  </td><td>0.05074452  </td><td>0.05074452  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0261256957</td><td>0.0261256957</td><td>0.0261256957</td><td>0.0261256957</td><td>0.0261256957</td><td>0.032356781 </td><td>0.032356781 </td><td>0.032356781 </td><td>0.032356781 </td><td>0.032356781 </td><td>...         </td><td>0.10443388  </td><td>0.10443388  </td><td>0.03463223  </td><td>0.03463223  </td><td>0.03463223  </td><td>0.03463223  </td><td>0.03463223  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0295911586</td><td>0.0295911586</td><td>0.0295911586</td><td>0.0295911586</td><td>0.0295911586</td><td>0.031434498 </td><td>0.031434498 </td><td>0.031434498 </td><td>0.031434498 </td><td>0.031434498 </td><td>...         </td><td>0.57300000  </td><td>0.57300000  </td><td>0.03761354  </td><td>0.03761354  </td><td>0.03761354  </td><td>0.03761354  </td><td>0.03761354  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0099783397</td><td>0.0099783397</td><td>0.0099783397</td><td>0.0099783397</td><td>0.0099783397</td><td>0.003649551 </td><td>0.003649551 </td><td>0.003649551 </td><td>0.003649551 </td><td>0.003649551 </td><td>...         </td><td>0.12112487  </td><td>0.12112487  </td><td>0.01557713  </td><td>0.01557713  </td><td>0.01557713  </td><td>0.01557713  </td><td>0.01557713  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0166998189</td><td>0.0166998189</td><td>0.0166998189</td><td>0.0166998189</td><td>0.0166998189</td><td>0.026302864 </td><td>0.026302864 </td><td>0.026302864 </td><td>0.026302864 </td><td>0.026302864 </td><td>...         </td><td>0.37730432  </td><td>0.37730432  </td><td>0.01672144  </td><td>0.01672144  </td><td>0.01672144  </td><td>0.01672144  </td><td>0.01672144  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0222092480</td><td>0.0222092480</td><td>0.0222092480</td><td>0.0222092480</td><td>0.0222092480</td><td>0.012534391 </td><td>0.012534391 </td><td>0.012534391 </td><td>0.012534391 </td><td>0.012534391 </td><td>...         </td><td>0.67200000  </td><td>0.67200000  </td><td>0.05970110  </td><td>0.05970110  </td><td>0.05970110  </td><td>0.05970110  </td><td>0.05970110  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
+	<tr><td>0.0000623553</td><td>0.0000623553</td><td>0.0000623553</td><td>0.0000623553</td><td>0.0000623553</td><td>0.022477013 </td><td>0.022477013 </td><td>0.022477013 </td><td>0.022477013 </td><td>0.022477013 </td><td>...         </td><td>0.77220000  </td><td>0.77220000  </td><td>0.09695551  </td><td>0.09695551  </td><td>0.09695551  </td><td>0.09695551  </td><td>0.09695551  </td><td>NA          </td><td>NA          </td><td>NA          </td></tr>
 </tbody>
 </table>
 
@@ -15155,7 +15133,7 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Segment-Length-5">Segment Length 5<a class="anchor-link" href="#Segment-Length-5">&#182;</a></h3>
+<h3 id="Segment-Length-4">Segment Length 4<a class="anchor-link" href="#Segment-Length-4">&#182;</a></h3>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
@@ -15163,7 +15141,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">paa_train</span><span class="o">=</span><span class="nf">paa_obtainer</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span><span class="m">5</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">paa_train</span><span class="o">=</span><span class="nf">paa_obtainer</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span> <span class="m">4</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15174,7 +15152,7 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Segment-Length-10">Segment Length 10<a class="anchor-link" href="#Segment-Length-10">&#182;</a></h3>
+<h3 id="Segment-Length-8">Segment Length 8<a class="anchor-link" href="#Segment-Length-8">&#182;</a></h3>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
@@ -15182,7 +15160,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">paa_train_2</span><span class="o">=</span><span class="nf">paa_obtainer</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span><span class="m">10</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">paa_train_2</span><span class="o">=</span><span class="nf">paa_obtainer</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span> <span class="m">8</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15258,21 +15236,21 @@ a.anchor-link {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">dist_euc</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">dist</span><span class="p">(</span><span class="n">traindata</span><span class="p">))</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_euc</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_euc</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_euc_raw_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_euc</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_euc_raw_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 
 <span class="n">dist_dtw</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">dtwDist</span><span class="p">(</span><span class="n">traindata</span><span class="p">))</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_dtw</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_dtw</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_dtw_raw_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_dtw</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_dtw_raw_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 
 <span class="n">dist_lcss</span><span class="o">=</span><span class="nf">TSDatabaseDistances</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="s">&#39;lcss&#39;</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="m">0.05</span><span class="p">)</span>
 <span class="n">dist_lcss</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">dist_lcss</span><span class="p">)</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_lcss</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_lcss</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_lcss_raw_epsilon_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>  
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_lcss</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_lcss_raw_epsilon_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>  
 
 <span class="n">dist_erp</span><span class="o">=</span><span class="nf">TSDatabaseDistances</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="s">&#39;erp&#39;</span><span class="p">,</span><span class="n">g</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
 <span class="n">dist_erp</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">dist_erp</span><span class="p">)</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_erp</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_erp</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_erp_raw_gap_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_erp</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_erp_raw_gap_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15323,21 +15301,21 @@ x being coerced from class: matrix to data.table
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">dist_euc_diff</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">dist</span><span class="p">(</span><span class="n">diff_train</span><span class="p">))</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_euc_diff</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_euc_diff</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_euc_diff_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_euc_diff</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_euc_diff_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 
 <span class="n">dist_dtw_diff</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">dtwDist</span><span class="p">(</span><span class="n">diff_train</span><span class="p">))</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_dtw_diff</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_dtw_diff</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_dtw_diff_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_dtw_diff</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_dtw_diff_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 
 <span class="n">dist_lcss_diff</span><span class="o">=</span><span class="nf">TSDatabaseDistances</span><span class="p">(</span><span class="n">diff_train</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="s">&#39;lcss&#39;</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="m">0.05</span><span class="p">)</span>
 <span class="n">dist_lcss_diff</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">dist_lcss_diff</span><span class="p">)</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_lcss_diff</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_lcss_diff</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_lcss_diff_epsilon_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>  
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_lcss_diff</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_lcss_diff_epsilon_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>  
 
 <span class="n">dist_erp_diff</span><span class="o">=</span><span class="nf">TSDatabaseDistances</span><span class="p">(</span><span class="n">diff_train</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="s">&#39;erp&#39;</span><span class="p">,</span><span class="n">g</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
 <span class="n">dist_erp_diff</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">dist_erp_diff</span><span class="p">)</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_erp_diff</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_erp_diff</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_erp_diff_gap_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_erp_diff</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_erp_diff_gap_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15382,21 +15360,21 @@ x being coerced from class: matrix to data.table
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">dist_euc_diff_2</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">dist</span><span class="p">(</span><span class="n">diff_train_2</span><span class="p">))</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_euc_diff_2</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_euc_diff_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_euc_diff2_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_euc_diff_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_euc_diff2_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 
 <span class="n">dist_dtw_diff_2</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">dtwDist</span><span class="p">(</span><span class="n">diff_train_2</span><span class="p">))</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_dtw_diff_2</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_dtw_diff_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_dtw_diff2_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_dtw_diff_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_dtw_diff2_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 
 <span class="n">dist_lcss_diff_2</span><span class="o">=</span><span class="nf">TSDatabaseDistances</span><span class="p">(</span><span class="n">diff_train_2</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="s">&#39;lcss&#39;</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="m">0.05</span><span class="p">)</span>
 <span class="n">dist_lcss_diff_2</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">dist_lcss_diff_2</span><span class="p">)</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_lcss_diff_2</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_lcss_diff_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_lcss_diff2_epsilon_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>  
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_lcss_diff_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_lcss_diff2_epsilon_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>  
 
 <span class="n">dist_erp_diff_2</span><span class="o">=</span><span class="nf">TSDatabaseDistances</span><span class="p">(</span><span class="n">diff_train_2</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="s">&#39;erp&#39;</span><span class="p">,</span><span class="n">g</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
 <span class="n">dist_erp_diff_2</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">dist_erp_diff_2</span><span class="p">)</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_erp_diff_2</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_erp_diff_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_erp_diff2_gap_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_erp_diff_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_erp_diff2_gap_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15437,7 +15415,7 @@ x being coerced from class: matrix to data.table
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="First-PAA-dataset-when-segment-length-value-is-5">First PAA dataset when segment length value is 5<a class="anchor-link" href="#First-PAA-dataset-when-segment-length-value-is-5">&#182;</a></h3>
+<h3 id="First-PAA-dataset-when-segment-length-value-is-4">First PAA dataset when segment length value is 4<a class="anchor-link" href="#First-PAA-dataset-when-segment-length-value-is-4">&#182;</a></h3>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -15447,21 +15425,21 @@ x being coerced from class: matrix to data.table
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">dist_euc_paa</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">dist</span><span class="p">(</span><span class="n">paa_train</span><span class="p">))</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_euc_paa</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_euc_paa</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_euc_paa_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_euc_paa</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_euc_paa_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 
 <span class="n">dist_dtw_paa</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">dtwDist</span><span class="p">(</span><span class="n">paa_train</span><span class="p">))</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_dtw_paa</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_dtw_paa</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_dtw_paa_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_dtw_paa</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_dtw_paa_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 
 <span class="n">dist_lcss_paa</span><span class="o">=</span><span class="nf">TSDatabaseDistances</span><span class="p">(</span><span class="n">paa_train</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="s">&#39;lcss&#39;</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="m">0.05</span><span class="p">)</span>
 <span class="n">dist_lcss_paa</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">dist_lcss_paa</span><span class="p">)</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_lcss_paa</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_lcss_paa</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_lcss_paa_epsilon_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>  
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_lcss_paa</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_lcss_paa_epsilon_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>  
 
 <span class="n">dist_erp_paa</span><span class="o">=</span><span class="nf">TSDatabaseDistances</span><span class="p">(</span><span class="n">paa_train</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="s">&#39;erp&#39;</span><span class="p">,</span><span class="n">g</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
 <span class="n">dist_erp_paa</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">dist_erp_paa</span><span class="p">)</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_erp_paa</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_erp_paa</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_erp_paa_gap_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_erp_paa</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_erp_paa_gap_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15496,7 +15474,7 @@ x being coerced from class: matrix to data.table
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Second-PAA-dataset-when-segment-length-value-is-10">Second PAA dataset when segment length value is 10<a class="anchor-link" href="#Second-PAA-dataset-when-segment-length-value-is-10">&#182;</a></h3>
+<h3 id="Second-PAA-dataset-when-segment-length-value-is-8">Second PAA dataset when segment length value is 8<a class="anchor-link" href="#Second-PAA-dataset-when-segment-length-value-is-8">&#182;</a></h3>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -15506,21 +15484,21 @@ x being coerced from class: matrix to data.table
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">dist_euc_paa_2</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">dist</span><span class="p">(</span><span class="n">paa_train_2</span><span class="p">))</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_euc_paa_2</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_euc_paa_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_euc_paa2_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_euc_paa_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_euc_paa2_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 
 <span class="n">dist_dtw_paa_2</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">dtwDist</span><span class="p">(</span><span class="n">paa_train_2</span><span class="p">))</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_dtw_paa_2</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_dtw_paa_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_dtw_paa2_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_dtw_paa_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_dtw_paa2_dist.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 
 <span class="n">dist_lcss_paa_2</span><span class="o">=</span><span class="nf">TSDatabaseDistances</span><span class="p">(</span><span class="n">paa_train_2</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="s">&#39;lcss&#39;</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="m">0.05</span><span class="p">)</span>
 <span class="n">dist_lcss_paa_2</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">dist_lcss_paa_2</span><span class="p">)</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_lcss_paa_2</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_lcss_paa_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_lcss_paa2_epsilon_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>  
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_lcss_paa_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_lcss_paa2_epsilon_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>  
 
 <span class="n">dist_erp_paa_2</span><span class="o">=</span><span class="nf">TSDatabaseDistances</span><span class="p">(</span><span class="n">paa_train_2</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="s">&#39;erp&#39;</span><span class="p">,</span><span class="n">g</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
 <span class="n">dist_erp_paa_2</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">dist_erp_paa_2</span><span class="p">)</span>
 <span class="nf">diag</span><span class="p">(</span><span class="n">dist_erp_paa_2</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
-<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_erp_paa_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_erp_paa2_gap_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+<span class="nf">fwrite</span><span class="p">(</span><span class="n">dist_erp_paa_2</span><span class="p">,</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_erp_paa2_gap_005.csv&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">),</span><span class="n">col.names</span><span class="o">=</span><span class="bp">F</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15563,7 +15541,7 @@ x being coerced from class: matrix to data.table
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">dist_folder</span><span class="o">=</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">dist_folder</span><span class="o">=</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s&#39;</span><span class="p">,</span> <span class="n">distance_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">)</span>
 <span class="n">dist_files</span><span class="o">=</span><span class="nf">list.files</span><span class="p">(</span><span class="n">dist_folder</span><span class="p">,</span> <span class="n">full.names</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
 </pre></div>
 
@@ -15600,26 +15578,26 @@ x being coerced from class: matrix to data.table
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
 <ol class=list-inline>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_dtw_diff_dist.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_dtw_diff2_dist.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_dtw_paa_dist.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_dtw_paa2_dist.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_dtw_raw_dist.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_erp_diff_gap_005.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_erp_diff2_gap_005.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_erp_paa_gap_005.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_erp_paa2_gap_005.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_erp_raw_gap_005.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_euc_diff_dist.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_euc_diff2_dist.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_euc_paa_dist.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_euc_paa2_dist.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_euc_raw_dist.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_lcss_diff_epsilon_005.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_lcss_diff2_epsilon_005.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_lcss_paa_epsilon_005.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_lcss_paa2_epsilon_005.csv'</li>
-	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_lcss_raw_epsilon_005.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_dtw_diff_dist.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_dtw_diff2_dist.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_dtw_paa_dist.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_dtw_paa2_dist.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_dtw_raw_dist.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_erp_diff_gap_005.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_erp_diff2_gap_005.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_erp_paa_gap_005.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_erp_paa2_gap_005.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_erp_raw_gap_005.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_euc_diff_dist.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_euc_diff2_dist.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_euc_paa_dist.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_euc_paa2_dist.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_euc_raw_dist.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_lcss_diff_epsilon_005.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_lcss_diff2_epsilon_005.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_lcss_paa_epsilon_005.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_lcss_paa2_epsilon_005.csv'</li>
+	<li>'C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_lcss_raw_epsilon_005.csv'</li>
 </ol>
 
 </div>
@@ -15741,26 +15719,26 @@ x being coerced from class: matrix to data.table
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_dtw_diff_dist.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_dtw_diff2_dist.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_dtw_paa_dist.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_dtw_paa2_dist.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_dtw_raw_dist.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_erp_diff_gap_005.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_erp_diff2_gap_005.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_erp_paa_gap_005.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_erp_paa2_gap_005.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_erp_raw_gap_005.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_euc_diff_dist.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_euc_diff2_dist.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_euc_paa_dist.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_euc_paa2_dist.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_euc_raw_dist.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_lcss_diff_epsilon_005.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_lcss_diff2_epsilon_005.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_lcss_paa_epsilon_005.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_lcss_paa2_epsilon_005.csv&#34;
-[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/Beef/Beef_lcss_raw_epsilon_005.csv&#34;
+<pre>[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_dtw_diff_dist.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_dtw_diff2_dist.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_dtw_paa_dist.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_dtw_paa2_dist.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_dtw_raw_dist.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_erp_diff_gap_005.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_erp_diff2_gap_005.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_erp_paa_gap_005.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_erp_paa2_gap_005.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_erp_raw_gap_005.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_euc_diff_dist.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_euc_diff2_dist.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_euc_paa_dist.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_euc_paa2_dist.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_euc_raw_dist.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_lcss_diff_epsilon_005.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_lcss_diff2_epsilon_005.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_lcss_paa_epsilon_005.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_lcss_paa2_epsilon_005.csv&#34;
+[1] &#34;C:/Users/bahad/GitHub/IE48B/Homework3/Distances/BME/BME_lcss_raw_epsilon_005.csv&#34;
 </pre>
 </div>
 </div>
@@ -15806,12 +15784,12 @@ x being coerced from class: matrix to data.table
 <table>
 <thead><tr><th scope=col>approach</th><th scope=col>repid</th><th scope=col>foldid</th><th scope=col>k</th><th scope=col>acc</th></tr></thead>
 <tbody>
-	<tr><td>Beef_dtw_diff_dist.csv</td><td>1                     </td><td>1                     </td><td>1                     </td><td>0.0000000             </td></tr>
-	<tr><td>Beef_dtw_diff_dist.csv</td><td>1                     </td><td>1                     </td><td>3                     </td><td>0.0000000             </td></tr>
-	<tr><td>Beef_dtw_diff_dist.csv</td><td>1                     </td><td>1                     </td><td>5                     </td><td>0.0000000             </td></tr>
-	<tr><td>Beef_dtw_diff_dist.csv</td><td>1                     </td><td>2                     </td><td>1                     </td><td>0.0000000             </td></tr>
-	<tr><td>Beef_dtw_diff_dist.csv</td><td>1                     </td><td>2                     </td><td>3                     </td><td>0.3333333             </td></tr>
-	<tr><td>Beef_dtw_diff_dist.csv</td><td>1                     </td><td>2                     </td><td>5                     </td><td>0.6666667             </td></tr>
+	<tr><td>BME_dtw_diff_dist.csv</td><td>1                    </td><td>1                    </td><td>1                    </td><td>1                    </td></tr>
+	<tr><td>BME_dtw_diff_dist.csv</td><td>1                    </td><td>1                    </td><td>3                    </td><td>1                    </td></tr>
+	<tr><td>BME_dtw_diff_dist.csv</td><td>1                    </td><td>1                    </td><td>5                    </td><td>1                    </td></tr>
+	<tr><td>BME_dtw_diff_dist.csv</td><td>1                    </td><td>2                    </td><td>1                    </td><td>1                    </td></tr>
+	<tr><td>BME_dtw_diff_dist.csv</td><td>1                    </td><td>2                    </td><td>3                    </td><td>1                    </td></tr>
+	<tr><td>BME_dtw_diff_dist.csv</td><td>1                    </td><td>2                    </td><td>5                    </td><td>1                    </td></tr>
 </tbody>
 </table>
 
@@ -15886,66 +15864,66 @@ x being coerced from class: matrix to data.table
 <table>
 <thead><tr><th scope=col>approach</th><th scope=col>k</th><th scope=col>avg_acc</th><th scope=col>sdev_acc</th><th scope=col>repid</th><th scope=col>foldid</th><th scope=col>result_count</th></tr></thead>
 <tbody>
-	<tr><td>Beef_euc_diff_dist.csv         </td><td>1                              </td><td>0.56000000                     </td><td>0.2375231                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_diff2_gap_005.csv     </td><td>1                              </td><td>0.52666667                     </td><td>0.2616016                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_diff_gap_005.csv      </td><td>1                              </td><td>0.52666667                     </td><td>0.2242650                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_raw_dist.csv          </td><td>1                              </td><td>0.50000000                     </td><td>0.2876916                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_euc_paa_dist.csv          </td><td>1                              </td><td>0.50000000                     </td><td>0.3104382                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_euc_paa2_dist.csv         </td><td>1                              </td><td>0.50000000                     </td><td>0.3104382                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_euc_raw_dist.csv          </td><td>1                              </td><td>0.50000000                     </td><td>0.3104382                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_diff2_dist.csv        </td><td>1                              </td><td>0.50000000                     </td><td>0.2629848                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_euc_diff2_dist.csv        </td><td>1                              </td><td>0.49333333                     </td><td>0.2628985                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_euc_diff_dist.csv         </td><td>3                              </td><td>0.49333333                     </td><td>0.2154992                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_diff2_gap_005.csv     </td><td>5                              </td><td>0.48000000                     </td><td>0.2947769                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_diff_gap_005.csv      </td><td>3                              </td><td>0.46000000                     </td><td>0.2222336                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_euc_diff2_dist.csv        </td><td>3                              </td><td>0.45333333                     </td><td>0.2309401                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_diff2_gap_005.csv     </td><td>3                              </td><td>0.44666667                     </td><td>0.2391406                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_raw_dist.csv          </td><td>3                              </td><td>0.44000000                     </td><td>0.3044641                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_euc_diff2_dist.csv        </td><td>5                              </td><td>0.44000000                     </td><td>0.2375231                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_euc_paa_dist.csv          </td><td>3                              </td><td>0.44000000                     </td><td>0.3044641                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_euc_paa2_dist.csv         </td><td>3                              </td><td>0.44000000                     </td><td>0.3044641                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_euc_raw_dist.csv          </td><td>3                              </td><td>0.44000000                     </td><td>0.3044641                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_paa_gap_005.csv       </td><td>1                              </td><td>0.43333333                     </td><td>0.3176587                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_paa2_gap_005.csv      </td><td>1                              </td><td>0.43333333                     </td><td>0.3176587                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_raw_gap_005.csv       </td><td>1                              </td><td>0.43333333                     </td><td>0.3176587                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_euc_diff_dist.csv         </td><td>5                              </td><td>0.43333333                     </td><td>0.2156044                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_diff2_dist.csv        </td><td>3                              </td><td>0.42666667                     </td><td>0.2431837                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_diff_gap_005.csv      </td><td>5                              </td><td>0.40666667                     </td><td>0.2633295                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_paa_dist.csv          </td><td>1                              </td><td>0.38666667                     </td><td>0.2551954                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_diff_dist.csv         </td><td>1                              </td><td>0.38000000                     </td><td>0.2694582                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_euc_paa2_dist.csv         </td><td>5                              </td><td>0.37333333                     </td><td>0.2576714                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_raw_gap_005.csv       </td><td>3                              </td><td>0.36666667                     </td><td>0.2954684                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_paa2_dist.csv         </td><td>1                              </td><td>0.36666667                     </td><td>0.2796986                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_paa_gap_005.csv       </td><td>3                              </td><td>0.36000000                     </td><td>0.2999622                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_paa2_gap_005.csv      </td><td>3                              </td><td>0.36000000                     </td><td>0.2999622                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_diff2_dist.csv        </td><td>5                              </td><td>0.34666667                     </td><td>0.2604723                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_euc_paa_dist.csv          </td><td>5                              </td><td>0.34666667                     </td><td>0.2604723                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_euc_raw_dist.csv          </td><td>5                              </td><td>0.34666667                     </td><td>0.2604723                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_paa_dist.csv          </td><td>3                              </td><td>0.34000000                     </td><td>0.2563480                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_raw_dist.csv          </td><td>5                              </td><td>0.33333333                     </td><td>0.2693740                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_paa_gap_005.csv       </td><td>5                              </td><td>0.31333333                     </td><td>0.2643608                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_paa2_gap_005.csv      </td><td>5                              </td><td>0.31333333                     </td><td>0.2643608                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_erp_raw_gap_005.csv       </td><td>5                              </td><td>0.31333333                     </td><td>0.2643608                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_paa2_dist.csv         </td><td>3                              </td><td>0.30000000                     </td><td>0.2357023                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_diff_dist.csv         </td><td>5                              </td><td>0.27333333                     </td><td>0.2398979                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_diff_dist.csv         </td><td>3                              </td><td>0.26000000                     </td><td>0.2052596                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_paa_dist.csv          </td><td>5                              </td><td>0.26000000                     </td><td>0.2957752                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_dtw_paa2_dist.csv         </td><td>5                              </td><td>0.26000000                     </td><td>0.2800227                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_diff2_epsilon_005.csv</td><td>1                              </td><td>0.16666667                     </td><td>0.1683588                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_diff2_epsilon_005.csv</td><td>3                              </td><td>0.16666667                     </td><td>0.1683588                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_paa2_epsilon_005.csv </td><td>1                              </td><td>0.14000000                     </td><td>0.1793159                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_diff_epsilon_005.csv </td><td>3                              </td><td>0.13333333                     </td><td>0.1649572                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_diff_epsilon_005.csv </td><td>5                              </td><td>0.13333333                     </td><td>0.1649572                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_diff2_epsilon_005.csv</td><td>5                              </td><td>0.13333333                     </td><td>0.1649572                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_diff_epsilon_005.csv </td><td>1                              </td><td>0.10000000                     </td><td>0.1543033                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_paa2_epsilon_005.csv </td><td>5                              </td><td>0.10000000                     </td><td>0.1543033                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_paa_epsilon_005.csv  </td><td>1                              </td><td>0.07333333                     </td><td>0.1394840                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_paa2_epsilon_005.csv </td><td>3                              </td><td>0.07333333                     </td><td>0.1394840                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_paa_epsilon_005.csv  </td><td>3                              </td><td>0.05333333                     </td><td>0.1234427                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_paa_epsilon_005.csv  </td><td>5                              </td><td>0.03333333                     </td><td>0.1010153                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_raw_epsilon_005.csv  </td><td>1                              </td><td>0.03333333                     </td><td>0.1010153                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_raw_epsilon_005.csv  </td><td>3                              </td><td>0.03333333                     </td><td>0.1010153                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
-	<tr><td>Beef_lcss_raw_epsilon_005.csv  </td><td>5                              </td><td>0.03333333                     </td><td>0.1010153                      </td><td>5                              </td><td>10                             </td><td>50                             </td></tr>
+	<tr><td>BME_dtw_diff2_dist.csv        </td><td>1                             </td><td>1.00000000                    </td><td>0.00000000                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_dtw_diff2_dist.csv        </td><td>3                             </td><td>1.00000000                    </td><td>0.00000000                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_dtw_diff2_dist.csv        </td><td>5                             </td><td>0.96666667                    </td><td>0.10101525                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_dtw_diff_dist.csv         </td><td>1                             </td><td>0.94000000                    </td><td>0.12936264                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_dtw_diff_dist.csv         </td><td>5                             </td><td>0.94000000                    </td><td>0.12936264                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_dtw_diff_dist.csv         </td><td>3                             </td><td>0.93333333                    </td><td>0.13468701                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_paa_dist.csv          </td><td>1                             </td><td>0.90000000                    </td><td>0.15430335                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_paa2_dist.csv         </td><td>1                             </td><td>0.90000000                    </td><td>0.15430335                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_raw_dist.csv          </td><td>1                             </td><td>0.87333333                    </td><td>0.16343812                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_dtw_paa2_dist.csv         </td><td>1                             </td><td>0.87333333                    </td><td>0.16343812                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_paa2_gap_005.csv      </td><td>5                             </td><td>0.84000000                    </td><td>0.19331222                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_paa2_gap_005.csv      </td><td>1                             </td><td>0.83333333                    </td><td>0.18132793                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_paa2_dist.csv         </td><td>3                             </td><td>0.83333333                    </td><td>0.19342949                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_diff_gap_005.csv      </td><td>1                             </td><td>0.83333333                    </td><td>0.19342949                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_paa_dist.csv          </td><td>3                             </td><td>0.82000000                    </td><td>0.18082702                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_raw_dist.csv          </td><td>3                             </td><td>0.81333333                    </td><td>0.19237152                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_paa2_gap_005.csv      </td><td>3                             </td><td>0.80666667                    </td><td>0.20303815                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_diff2_dist.csv        </td><td>1                             </td><td>0.80666667                    </td><td>0.17931591                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_paa_gap_005.csv       </td><td>1                             </td><td>0.80000000                    </td><td>0.17817416                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_paa_gap_005.csv       </td><td>3                             </td><td>0.80000000                    </td><td>0.20203051                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_paa_gap_005.csv       </td><td>5                             </td><td>0.80000000                    </td><td>0.20203051                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_raw_gap_005.csv       </td><td>5                             </td><td>0.80000000                    </td><td>0.20203051                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_dtw_paa2_dist.csv         </td><td>3                             </td><td>0.80000000                    </td><td>0.22335313                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_diff_gap_005.csv      </td><td>3                             </td><td>0.80000000                    </td><td>0.19047619                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_diff2_gap_005.csv     </td><td>1                             </td><td>0.80000000                    </td><td>0.19047619                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_diff2_gap_005.csv     </td><td>3                             </td><td>0.80000000                    </td><td>0.19047619                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_diff2_gap_005.csv     </td><td>5                             </td><td>0.80000000                    </td><td>0.17817416                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_diff_gap_005.csv      </td><td>5                             </td><td>0.79333333                    </td><td>0.20079208                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_raw_gap_005.csv       </td><td>3                             </td><td>0.78666667                    </td><td>0.19931857                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_dtw_raw_dist.csv          </td><td>1                             </td><td>0.78000000                    </td><td>0.19760470                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_dtw_raw_dist.csv          </td><td>5                             </td><td>0.77333333                    </td><td>0.20691010                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_diff_dist.csv         </td><td>1                             </td><td>0.77333333                    </td><td>0.18368859                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_paa2_dist.csv         </td><td>5                             </td><td>0.77333333                    </td><td>0.21759352                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_erp_raw_gap_005.csv       </td><td>1                             </td><td>0.76666667                    </td><td>0.16835876                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_dtw_paa_dist.csv          </td><td>1                             </td><td>0.76666667                    </td><td>0.20481727                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_dtw_paa_dist.csv          </td><td>3                             </td><td>0.76666667                    </td><td>0.21560441                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_dtw_paa2_dist.csv         </td><td>5                             </td><td>0.76666667                    </td><td>0.21560441                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_diff_dist.csv         </td><td>3                             </td><td>0.76000000                    </td><td>0.19095179                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_diff2_dist.csv        </td><td>3                             </td><td>0.76000000                    </td><td>0.19095179                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_dtw_paa_dist.csv          </td><td>5                             </td><td>0.75333333                    </td><td>0.22141577                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_dtw_raw_dist.csv          </td><td>3                             </td><td>0.74666667                    </td><td>0.20822106                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_paa_dist.csv          </td><td>5                             </td><td>0.74000000                    </td><td>0.23608677                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_raw_dist.csv          </td><td>5                             </td><td>0.74000000                    </td><td>0.23608677                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_diff2_dist.csv        </td><td>5                             </td><td>0.66666667                    </td><td>0.25197632                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_euc_diff_dist.csv         </td><td>5                             </td><td>0.64666667                    </td><td>0.24660966                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_paa2_epsilon_005.csv </td><td>5                             </td><td>0.28000000                    </td><td>0.18269834                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_paa2_epsilon_005.csv </td><td>3                             </td><td>0.20666667                    </td><td>0.16343812                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_paa_epsilon_005.csv  </td><td>1                             </td><td>0.17333333                    </td><td>0.16822402                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_paa2_epsilon_005.csv </td><td>1                             </td><td>0.15333333                    </td><td>0.16781914                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_raw_epsilon_005.csv  </td><td>3                             </td><td>0.10000000                    </td><td>0.15430335                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_raw_epsilon_005.csv  </td><td>1                             </td><td>0.08000000                    </td><td>0.14380637                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_paa_epsilon_005.csv  </td><td>3                             </td><td>0.07333333                    </td><td>0.13948399                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_raw_epsilon_005.csv  </td><td>5                             </td><td>0.06000000                    </td><td>0.12936264                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_paa_epsilon_005.csv  </td><td>5                             </td><td>0.02666667                    </td><td>0.09134917                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_diff_epsilon_005.csv </td><td>1                             </td><td>0.01333333                    </td><td>0.06598289                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_diff_epsilon_005.csv </td><td>3                             </td><td>0.00000000                    </td><td>0.00000000                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_diff_epsilon_005.csv </td><td>5                             </td><td>0.00000000                    </td><td>0.00000000                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_diff2_epsilon_005.csv</td><td>1                             </td><td>0.00000000                    </td><td>0.00000000                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_diff2_epsilon_005.csv</td><td>3                             </td><td>0.00000000                    </td><td>0.00000000                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
+	<tr><td>BME_lcss_diff2_epsilon_005.csv</td><td>5                             </td><td>0.00000000                    </td><td>0.00000000                    </td><td>5                             </td><td>10                            </td><td>50                            </td></tr>
 </tbody>
 </table>
 
@@ -15984,7 +15962,7 @@ x being coerced from class: matrix to data.table
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[56]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[54]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">acc_res_ordered</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
@@ -16011,7 +15989,7 @@ x being coerced from class: matrix to data.table
 <table>
 <thead><tr><th scope=col>approach</th><th scope=col>k</th><th scope=col>avg_acc</th><th scope=col>sdev_acc</th><th scope=col>repid</th><th scope=col>foldid</th><th scope=col>result_count</th></tr></thead>
 <tbody>
-	<tr><td>Beef_euc_diff_dist.csv</td><td>1                     </td><td>0.56                  </td><td>0.2375231             </td><td>5                     </td><td>10                    </td><td>50                    </td></tr>
+	<tr><td>BME_dtw_diff2_dist.csv</td><td>1                     </td><td>1                     </td><td>0                     </td><td>5                     </td><td>10                    </td><td>50                    </td></tr>
 </tbody>
 </table>
 
@@ -16026,7 +16004,7 @@ x being coerced from class: matrix to data.table
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Result is obtained by considering mean and standard deviation of the accuracy over the test folds.</p>
+<p>Result is obtained by considering mean and standard deviation of the accuracy over the test folds. There are 2 different models obtaining the full accuracy. The only difference in these models are the k values. K is selected as 1 to have simple model.</p>
 
 </div>
 </div>
@@ -16038,11 +16016,11 @@ x being coerced from class: matrix to data.table
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>Representation: 1 Difference Taken Data</li>
-<li>Distance: Euclidean</li>
+<li>Representation: 2 Difference Taken Data</li>
+<li>Distance: Dynamic Time Warping with epsilon 0.05</li>
 <li>K value of NN: 1</li>
 </ul>
-<p><strong>Average Accuracy: 0.56 based on 5 repeats and 10-fold cross validation</strong></p>
+<p><strong>Average Accuracy: 1.00 based on 5 repeats and 10-fold cross validation</strong></p>
 
 </div>
 </div>
@@ -16063,8 +16041,8 @@ x being coerced from class: matrix to data.table
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[42]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">traindata</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">fread</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_TRAIN.txt&#39;</span><span class="p">,</span><span class="n">dataset_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span><span class="n">first_dataset</span><span class="p">)))</span>
-<span class="n">testdata</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">fread</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_TEST.txt&#39;</span><span class="p">,</span><span class="n">dataset_path</span><span class="p">,</span> <span class="n">first_dataset</span><span class="p">,</span><span class="n">first_dataset</span><span class="p">)))</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">traindata</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">fread</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_TRAIN.txt&#39;</span><span class="p">,</span><span class="n">dataset_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span><span class="n">third_dataset</span><span class="p">)))</span>
+<span class="n">testdata</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">fread</span><span class="p">(</span><span class="nf">sprintf</span><span class="p">(</span><span class="s">&#39;%s%s/%s_TEST.txt&#39;</span><span class="p">,</span><span class="n">dataset_path</span><span class="p">,</span> <span class="n">third_dataset</span><span class="p">,</span><span class="n">third_dataset</span><span class="p">)))</span>
 </pre></div>
 
      </div>
@@ -16184,6 +16162,126 @@ x being coerced from class: matrix to data.table
 	<li>58</li>
 	<li>59</li>
 	<li>60</li>
+	<li>61</li>
+	<li>62</li>
+	<li>63</li>
+	<li>64</li>
+	<li>65</li>
+	<li>66</li>
+	<li>67</li>
+	<li>68</li>
+	<li>69</li>
+	<li>70</li>
+	<li>71</li>
+	<li>72</li>
+	<li>73</li>
+	<li>74</li>
+	<li>75</li>
+	<li>76</li>
+	<li>77</li>
+	<li>78</li>
+	<li>79</li>
+	<li>80</li>
+	<li>81</li>
+	<li>82</li>
+	<li>83</li>
+	<li>84</li>
+	<li>85</li>
+	<li>86</li>
+	<li>87</li>
+	<li>88</li>
+	<li>89</li>
+	<li>90</li>
+	<li>91</li>
+	<li>92</li>
+	<li>93</li>
+	<li>94</li>
+	<li>95</li>
+	<li>96</li>
+	<li>97</li>
+	<li>98</li>
+	<li>99</li>
+	<li>100</li>
+	<li>101</li>
+	<li>102</li>
+	<li>103</li>
+	<li>104</li>
+	<li>105</li>
+	<li>106</li>
+	<li>107</li>
+	<li>108</li>
+	<li>109</li>
+	<li>110</li>
+	<li>111</li>
+	<li>112</li>
+	<li>113</li>
+	<li>114</li>
+	<li>115</li>
+	<li>116</li>
+	<li>117</li>
+	<li>118</li>
+	<li>119</li>
+	<li>120</li>
+	<li>121</li>
+	<li>122</li>
+	<li>123</li>
+	<li>124</li>
+	<li>125</li>
+	<li>126</li>
+	<li>127</li>
+	<li>128</li>
+	<li>129</li>
+	<li>130</li>
+	<li>131</li>
+	<li>132</li>
+	<li>133</li>
+	<li>134</li>
+	<li>135</li>
+	<li>136</li>
+	<li>137</li>
+	<li>138</li>
+	<li>139</li>
+	<li>140</li>
+	<li>141</li>
+	<li>142</li>
+	<li>143</li>
+	<li>144</li>
+	<li>145</li>
+	<li>146</li>
+	<li>147</li>
+	<li>148</li>
+	<li>149</li>
+	<li>150</li>
+	<li>151</li>
+	<li>152</li>
+	<li>153</li>
+	<li>154</li>
+	<li>155</li>
+	<li>156</li>
+	<li>157</li>
+	<li>158</li>
+	<li>159</li>
+	<li>160</li>
+	<li>161</li>
+	<li>162</li>
+	<li>163</li>
+	<li>164</li>
+	<li>165</li>
+	<li>166</li>
+	<li>167</li>
+	<li>168</li>
+	<li>169</li>
+	<li>170</li>
+	<li>171</li>
+	<li>172</li>
+	<li>173</li>
+	<li>174</li>
+	<li>175</li>
+	<li>176</li>
+	<li>177</li>
+	<li>178</li>
+	<li>179</li>
+	<li>180</li>
 </ol>
 
 </div>
@@ -16225,7 +16323,7 @@ x being coerced from class: matrix to data.table
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[48]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">diff_test</span><span class="o">=</span><span class="nf">difference_obtainer</span><span class="p">(</span><span class="n">all_dt</span><span class="p">,</span><span class="m">1</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">diff_test_2</span><span class="o">=</span><span class="nf">difference_obtainer</span><span class="p">(</span><span class="n">all_dt</span><span class="p">,</span><span class="m">2</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -16239,8 +16337,8 @@ x being coerced from class: matrix to data.table
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[49]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">dist_euc_diff_test</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">dist</span><span class="p">(</span><span class="n">diff_test</span><span class="p">))</span>
-<span class="nf">diag</span><span class="p">(</span><span class="n">dist_euc_diff_test</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">dist_dtw_diff_2_test</span><span class="o">=</span><span class="nf">as.matrix</span><span class="p">(</span><span class="nf">dtwDist</span><span class="p">(</span><span class="n">diff_test_2</span><span class="p">))</span>
+<span class="nf">diag</span><span class="p">(</span><span class="n">dist_dtw_diff_2_test</span><span class="p">)</span><span class="o">=</span><span class="n">large_number</span>
 </pre></div>
 
      </div>
@@ -16259,9 +16357,9 @@ x being coerced from class: matrix to data.table
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[50]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">last_result</span><span class="o">=</span><span class="nf">nn_classify_cv</span><span class="p">(</span><span class="n">dist_euc_diff_test</span><span class="p">,</span><span class="n">allclass</span><span class="p">,</span><span class="n">test_indices_last</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="n">last_k</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">last_result</span><span class="o">=</span><span class="nf">nn_classify_cv</span><span class="p">(</span><span class="n">dist_dtw_diff_2_test</span><span class="p">,</span><span class="n">allclass</span><span class="p">,</span><span class="n">test_indices_last</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="n">last_k</span><span class="p">)</span>
 <span class="n">accuracy</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">allclass</span><span class="p">[</span><span class="n">test_indices_last</span><span class="p">]</span><span class="o">==</span><span class="n">last_result</span><span class="o">$</span><span class="n">prediction</span><span class="o">$</span><span class="n">predicted</span><span class="p">)</span><span class="o">/</span><span class="nf">length</span><span class="p">(</span><span class="n">test_indices_last</span><span class="p">)</span>
-<span class="n">final_res</span><span class="o">=</span><span class="nf">data.table</span><span class="p">(</span><span class="n">approach</span><span class="o">=</span><span class="s">&quot;Beef_euc_diff_dist_Test.csv&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">last_k</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="n">accuracy</span><span class="p">)</span>
+<span class="n">final_res</span><span class="o">=</span><span class="nf">data.table</span><span class="p">(</span><span class="n">approach</span><span class="o">=</span><span class="s">&quot;BME_dtw_diff2_dist_Test.csv&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">last_k</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="n">accuracy</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -16304,7 +16402,7 @@ x being coerced from class: matrix to data.table
 <table>
 <thead><tr><th scope=col>approach</th><th scope=col>k</th><th scope=col>acc</th></tr></thead>
 <tbody>
-	<tr><td>Beef_euc_diff_dist_Test.csv</td><td>1                          </td><td>0.7                        </td></tr>
+	<tr><td>BME_dtw_diff2_dist_Test.csv</td><td>1                          </td><td>0.98                       </td></tr>
 </tbody>
 </table>
 
@@ -16351,7 +16449,7 @@ x being coerced from class: matrix to data.table
 <table>
 <thead><tr><th scope=col>approach</th><th scope=col>k</th><th scope=col>avg_acc</th></tr></thead>
 <tbody>
-	<tr><td>Beef_euc_diff_dist.csv</td><td>1                     </td><td>0.56                  </td></tr>
+	<tr><td>BME_dtw_diff2_dist.csv</td><td>1                     </td><td>1                     </td></tr>
 </tbody>
 </table>
 
