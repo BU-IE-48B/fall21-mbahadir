@@ -42,6 +42,11 @@ In order to have shorter notebooks, datasets are inspected in different notebook
 [here](Homework3\Results.html) HTML file of Result Notebook of Homework 3 <br>
 [here](Homework3\Results.r) R Code of Result Notebook of Homework 3
 
+## Homework 4
+
+[here](Homework4\Homework4.html) HTML file of Homework 4 <br>
+[here](Homework4\Homework4.r) R Code of Homework 4
+
 
 ### Class Github Page
 
