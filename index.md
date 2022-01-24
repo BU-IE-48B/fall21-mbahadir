@@ -47,6 +47,10 @@ In order to have shorter notebooks, datasets are inspected in different notebook
 [here](Homework4\Homework4.html) HTML file of Homework 4 <br>
 [here](Homework4\Homework4.r) R Code of Homework 4
 
+## Final Project
+
+[here](Final_project.html) Final Report HTML format <br>
+[here](Final_project.pdf) Final Report PDF format 
 
 ### Class Github Page
 
